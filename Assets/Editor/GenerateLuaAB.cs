@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class GenerateLuaAB : Editor
+public class GenerateLuaAB
 {
     static string path = Application.dataPath + "/ArtRes/Lua";
     static string newPath = path+"/LuaTxt";
@@ -29,7 +29,7 @@ public class GenerateLuaAB : Editor
             return;
         }
         else{
-            string[] oldFileStrs = Directory.GetFiles(newPath, "*.txt");
+            string[] oldFileStrs = Directory.GetFiles(newPath);
             for (int i = 0; i < oldFileStrs.Length; i++)
             {
                 File.Delete(oldFileStrs[i]);

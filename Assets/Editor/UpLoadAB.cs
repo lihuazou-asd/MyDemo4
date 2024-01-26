@@ -29,7 +29,6 @@ public class UpLoadAB : Editor
             }
         }
         UnityWebRequest unityWebRequest = UnityWebRequest.Post(serverPath,dataList);
-        unityWebRequest.SetRequestHeader("If-Match", "*");
         unityWebRequest.SendWebRequest();
         while (!unityWebRequest.isDone)
         {
