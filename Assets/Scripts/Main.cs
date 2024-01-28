@@ -7,7 +7,7 @@ public class Main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
+        // ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
         print(Application.persistentDataPath);

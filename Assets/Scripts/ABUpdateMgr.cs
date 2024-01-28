@@ -10,6 +10,13 @@ using UnityEngine.Networking;
 
 public class ABUpdateMgr : MonoBehaviour
 {
+    private static bool haveNewVersion = false;
+
+    public static bool HaveNewVersion{
+        get{
+            return haveNewVersion;
+        }
+    }
     private static string HTTPServer = "http://127.0.0.1/HTTPServer/";
     private static string localPath = Application.persistentDataPath;
     private static ABUpdateMgr instance;
@@ -29,6 +36,9 @@ public class ABUpdateMgr : MonoBehaviour
     private List<string> needToDownLoadAB = new List<string>();
 
     public void CheckUpABInfo(UnityAction<string> upDateTips){
+        localABInfoDic.Clear();
+        remoteABInfoDic.Clear();
+        needToDownLoadAB.Clear();
         upDateTips?.Invoke("开始下载AB包对比文件");
         DownLoadABCompareFile((isOver)=>{
             if(isOver){
@@ -37,31 +47,34 @@ public class ABUpdateMgr : MonoBehaviour
                 upDateTips?.Invoke("获取远端AB包信息成功");
                 GetLocalABCompareFileInfo((isOver)=>{
                     if(isOver){
+                        upDateTips?.Invoke("获取本地AB包信息成功");
                         CompareLocalAndRemote(localABInfoDic,remoteABInfoDic);
                         upDateTips?.Invoke("比较两段AB包信息成功");
-                        DownABFile((isOver)=>{
-                            if(isOver){
-                                upDateTips?.Invoke("更新AB包成功");
-                                File.WriteAllText(localPath+"/ABCompareInfo.txt",File.ReadAllText(localPath+"/ABCompareInfo_TMP.txt"));
-                            }
-                            else{
-                                upDateTips?.Invoke("更新AB包失败");
-                            }
-                        });
+                        
                     }
                     else{
-                        upDateTips?.Invoke("获取本地AB包信息成功");
+                        upDateTips?.Invoke("获取本地AB包信息失败");
                     }
-                    
                 });
             }
             else{
                 upDateTips?.Invoke("AB包对比文件下载错误");
             }
         });
+    }
 
-
-
+    public void StartUpdate(UnityAction<string> upDateTips){
+        if(true){
+            DownABFile((isOver)=>{
+                if(isOver){
+                    upDateTips?.Invoke("更新AB包成功");
+                    File.WriteAllText(localPath+"/ABCompareInfo.txt",File.ReadAllText(localPath+"/ABCompareInfo_TMP.txt"));
+                }
+                else{
+                    upDateTips?.Invoke("更新AB包失败");
+                }
+            });
+        }
     }
 
     private async void DownLoadABCompareFile(UnityAction<bool> unityAction){
@@ -129,6 +142,13 @@ public class ABUpdateMgr : MonoBehaviour
                 
             }
         }
+        if(needToDownLoadAB.Count==0&&dicLocal.Count==0){
+            haveNewVersion = false;
+            return;
+        }
+        else{
+            haveNewVersion = true;
+        }
         foreach(string abName in dicLocal.Keys){
             if(File.Exists(localPath+"/"+abName))
                 File.Delete(localPath+"/"+abName);
@@ -164,9 +184,7 @@ public class ABUpdateMgr : MonoBehaviour
             request.Timeout = 2000;
 
             HttpWebResponse response =  request.GetResponse() as HttpWebResponse;
-            Debug.Log(1);
             if(response.StatusCode == HttpStatusCode.OK){
-                Debug.Log(2);
                 response.Close();
                 HttpWebRequest downLoadRequest = HttpWebRequest.Create(HTTPServer+downLoadFile) as HttpWebRequest;
                 downLoadRequest.Method = WebRequestMethods.Http.Get;
