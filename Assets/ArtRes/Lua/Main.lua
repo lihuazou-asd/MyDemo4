@@ -1,2 +1,6 @@
-print(123)
 require("InitClass")
+require("MainPanel")
+require("UIMgr")
+
+UIMgr:ShowPanel("MainPanel")
+UIMgr:HidePanel("MainPanel")

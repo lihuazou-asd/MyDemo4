@@ -72,7 +72,7 @@ public class ABMgr : SingletonAutoMono<ABMgr>
             return PersistentPathUrl+abName;
         }
         else{
-            return StreamingAssetsPathUrl+name;
+            return StreamingAssetsPathUrl+abName;
         }
     }
 

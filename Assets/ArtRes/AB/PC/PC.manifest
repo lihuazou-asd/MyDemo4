@@ -1,7 +1,10 @@
 ManifestFileVersion: 0
-CRC: 1559970187
+CRC: 3538468444
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
+      Name: uiprefab
+      Dependencies: {}
+    Info_1:
       Name: lua
       Dependencies: {}

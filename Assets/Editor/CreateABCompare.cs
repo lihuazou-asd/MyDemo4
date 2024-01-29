@@ -16,7 +16,7 @@ public class CreateABCompare
         DirectoryInfo directory = Directory.CreateDirectory(Application.dataPath + "/ArtRes/AB/PC/");
         //获取该目录下的所有文件信息
         FileInfo[] fileInfos = directory.GetFiles();
-
+        
         //用于存储信息的 字符串
         string abCompareInfo = "";
 

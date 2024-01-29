@@ -1,0 +1,11 @@
+Object:subClass("UIMgr")
+
+UIMgr.panelDic = {}
+
+
+function UIMgr:ShowPanel(panelName)
+    local panelObj = ABMgr.LoadRes("uiprefab",panelName,type(GameObject))
+    local panel = _G[panelName]:new()
+    self.panelDic[panelName] = panel
+    panel:Init(panelObj)
+end
