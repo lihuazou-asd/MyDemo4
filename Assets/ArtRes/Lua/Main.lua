@@ -3,4 +3,4 @@ require("MainPanel")
 require("UIMgr")
 
 UIMgr:ShowPanel("MainPanel")
-UIMgr:HidePanel("MainPanel")
+--UIMgr:HidePanel("MainPanel")
