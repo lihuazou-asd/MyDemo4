@@ -2,14 +2,9 @@
 
 <linker>
 
-	<assembly fullname="mscorlib">
-	    <type fullname="System.Object" preserve="all"/>
-		<type fullname="System.Collections.Generic.List`1[System.Int32]" preserve="all"/>
-		
-	</assembly>
-
 	<assembly fullname="UnityEngine.CoreModule">
-	    <type fullname="UnityEngine.Object" preserve="all"/>
+	    <type fullname="UnityEngine.GameObject" preserve="all"/>
+		<type fullname="UnityEngine.Object" preserve="all"/>
 		<type fullname="UnityEngine.Vector2" preserve="all"/>
 		<type fullname="UnityEngine.Vector3" preserve="all"/>
 		<type fullname="UnityEngine.Vector4" preserve="all"/>
@@ -19,7 +14,6 @@
 		<type fullname="UnityEngine.Bounds" preserve="all"/>
 		<type fullname="UnityEngine.Ray2D" preserve="all"/>
 		<type fullname="UnityEngine.Time" preserve="all"/>
-		<type fullname="UnityEngine.GameObject" preserve="all"/>
 		<type fullname="UnityEngine.Component" preserve="all"/>
 		<type fullname="UnityEngine.Behaviour" preserve="all"/>
 		<type fullname="UnityEngine.Transform" preserve="all"/>
@@ -34,6 +28,12 @@
 		<type fullname="UnityEngine.Mathf" preserve="all"/>
 		<type fullname="UnityEngine.Debug" preserve="all"/>
 		<type fullname="UnityEngine.WaitForSeconds" preserve="all"/>
+		
+	</assembly>
+
+	<assembly fullname="mscorlib">
+	    <type fullname="System.Object" preserve="all"/>
+		<type fullname="System.Collections.Generic.List`1[System.Int32]" preserve="all"/>
 		
 	</assembly>
 

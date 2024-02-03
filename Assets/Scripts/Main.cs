@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class Main : MonoBehaviour
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
         print(Application.persistentDataPath);
-        
+        // Slider slider
+        // Button
     }
     private void updateTips(string tip){
         print(tip);

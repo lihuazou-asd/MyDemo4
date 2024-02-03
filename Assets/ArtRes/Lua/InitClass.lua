@@ -25,9 +25,17 @@ Image = UI.Image
 Text = UI.Text
 Button = UI.Button
 Toggle = UI.Toggle
+Slider = UI.Slider
 ScrollRect = UI.ScrollRect
-
 Canvas = GameObject.Find("Canvas").transform
+
+--UI脚本初始化
+require("MainPanel")
+require("SetPanel")
+require("StartPanel")
+
+--管理器初始化
+require("UIMgr")
 
 --自己写的C#脚本相关
 --直接得到AB包资源管理器的 单例对象

@@ -20,4 +20,5 @@ function Object:subClass(className)
 	--给子类设置元表 以及 __index
 	self.__index = self
 	setmetatable(obj, self)
+	return obj
 end

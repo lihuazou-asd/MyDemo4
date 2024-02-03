@@ -1,27 +1,28 @@
 ManifestFileVersion: 0
-CRC: 1236388502
+CRC: 3001872111
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d0ac5ce9ff3add967b52ebad872348b1
+    Hash: 9267b386e41ff260df496b7a05837705
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: d0ac5ce9ff3add967b52ebad872348b1
+    Hash: 9267b386e41ff260df496b7a05837705
 HashAppended: 0
 ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/ArtRes/Lua/LuaTxt/SetPanel.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/StartPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/JsonUtility.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/Object.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/MainPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/SplitTools.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/UIMgr.lua.txt
-- Assets/ArtRes/Lua/LuaTxt/test.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/InitClass.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/Main.lua.txt
 Dependencies: []

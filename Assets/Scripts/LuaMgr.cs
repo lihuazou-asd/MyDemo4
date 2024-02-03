@@ -19,7 +19,7 @@ public class LuaMgr : BaseManager<LuaMgr>
         if(luaEnv!=null) return;
         luaEnv = new LuaEnv();
         luaEnv.AddLoader(MyCustomLoader);
-        //luaEnv.AddLoader(MyCustomABLoader);
+        luaEnv.AddLoader(MyCustomABLoader);
     }
 
     public void DoLuaFile(string file)

@@ -1,6 +1,4 @@
+--执行初始化的脚本
 require("InitClass")
-require("MainPanel")
-require("UIMgr")
 
 UIMgr:ShowPanel("MainPanel")
---UIMgr:HidePanel("MainPanel")
