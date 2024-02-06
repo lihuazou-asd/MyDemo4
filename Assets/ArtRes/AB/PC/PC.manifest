@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 784948197
+CRC: 4261843141
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: lua
+      Dependencies: {}
+    Info_2:
+      Name: json
       Dependencies: {}

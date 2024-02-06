@@ -37,6 +37,9 @@ require("StartPanel")
 --管理器初始化
 require("UIMgr")
 
+--读取json文件
+require("GameDataMgr")
+
 --自己写的C#脚本相关
 --直接得到AB包资源管理器的 单例对象
 ABMgr = CS.ABMgr.GetInstance()
