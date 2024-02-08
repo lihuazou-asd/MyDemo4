@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3187592042
+CRC: 2825469076
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 64b4cd0718bc21c2d5e2b1470f426eb6
+    Hash: 49e6d1b24b009a8df0c86a85127a89d4
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2c61c98ebd0c35fed742a229c05f51ce
+    Hash: fac08f238de86f81ac77c16c72f812bb
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 64b4cd0718bc21c2d5e2b1470f426eb6
+    Hash: 49e6d1b24b009a8df0c86a85127a89d4
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -20,8 +20,10 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
+- Class: 84
+  Script: {instanceID: 0}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
@@ -38,6 +40,8 @@ ClassTypes:
   Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -72,7 +76,9 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.SpriteState
 Assets:
+- Assets/ArtRes/Prefab/RoleRes/RoleRenderTexture.renderTexture
 - Assets/ArtRes/Prefab/UIPrefab/SetPanel.prefab
+- Assets/ArtRes/Prefab/UIPrefab/RoleGrid.prefab
 - Assets/ArtRes/Prefab/UIPrefab/StartPanel.prefab
 - Assets/ArtRes/Prefab/UIPrefab/MainPanel.prefab
 Dependencies: []

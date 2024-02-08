@@ -2,11 +2,15 @@ Object:subClass("GameDataMgr")
 
 GameDataMgr = _G["GameDataMgr"]
 
-GameDataMgr.PlayerInfos = nil
-GameDataMgr.MusicData = nil
+GameDataMgr.PlayerInfos = {}
+GameDataMgr.MusicData = {bgmData = 50,btmData = 50}
 
 function GameDataMgr:Init()
     GameDataMgr.PlayerInfos = GameDataMgr:PlayerInfosDeCode("json","PlayerInfos",typeof(TextAsset))
+    local tmpStr = self:ReadText(persistentDataPath.."/MusicData.json","r")
+    if tmpStr~=nil then
+        GameDataMgr.MusicData = Json.decode(tmpStr)
+    end
     
 end
 
@@ -19,3 +23,31 @@ function GameDataMgr:PlayerInfosDeCode(luaName,resName,type)
     end
     return PlayerInfo
 end
+
+
+function GameDataMgr:ReadText(path,operate)
+    local file = io.open(path, operate)
+    if file then
+        local content = file:read("*all")
+        file:close()
+        return content
+    else
+        print("File does not exist")
+        return nil
+    end
+
+end
+function GameDataMgr:WriteText(path,operate,str)
+    local file = io.open(path,operate)
+    if file then
+        file:write(str)
+        file:close()
+        print("File written successfully")
+    else
+        print("Failed to open file for writing")
+    end
+end
+
+
+
+

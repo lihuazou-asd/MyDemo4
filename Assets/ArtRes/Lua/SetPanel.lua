@@ -25,18 +25,25 @@ function SetPanel:Init(obj)
     self.sldBtmText = self.obj.transform:Find("SldBtmNum"):GetComponent(typeof(Text))
     self.sldBgm = self.obj.transform:Find("SldBgm"):GetComponent(typeof(Slider))
     self.sldBtm = self.obj.transform:Find("SldBtm"):GetComponent(typeof(Slider))
-    
+
+    self.sldBgm.value = GameDataMgr.MusicData.bgmData
+    self.sldBtm.value = GameDataMgr.MusicData.btmData 
+    self.sldBgmText.text = GameDataMgr.MusicData.bgmData
+    self.sldBtmText.text = GameDataMgr.MusicData.btmData
 
 
     --添加监听
     self.sldBgm.onValueChanged:AddListener(function(i)
         self.sldBgmText.text = i
+        GameDataMgr.MusicData.bgmData = i
     end)
     self.sldBtm.onValueChanged:AddListener(function(i)
         self.sldBtmText.text = i
+        GameDataMgr.MusicData.btmData = i
     end)
     self.btnExit.onClick:AddListener(function()
         self:BtnExitClick()
+        GameDataMgr:WriteText(persistentDataPath.."/MusicData.json","w",Json.encode(GameDataMgr.MusicData))
     end)
 
 end

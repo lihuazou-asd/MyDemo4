@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ public class Main : MonoBehaviour
         // ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
-        print(Application.persistentDataPath);
-        // Slider slider
-        // Button
+        Slider slider;
+        
+        
     }
     private void updateTips(string tip){
         print(tip);

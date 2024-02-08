@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 3211524166
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a85068912560b5bcda3df3d33bca95ca
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 669c3c998a00f8934b0044b204b50272
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a85068912560b5bcda3df3d33bca95ca
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/ArtRes/Prefab/RoleRes/AnimatorStart/2/Animator_2_StartPanel.controller
+- Assets/ArtRes/Prefab/RoleRes/AnimatorStart/1/Animator_1_StartPanel.controller
+Dependencies: []

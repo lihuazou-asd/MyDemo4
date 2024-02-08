@@ -9,7 +9,7 @@ UIMgr.panelDic = {}
 function UIMgr:ShowPanel(panelName)
     --如果面板存在则直接返回
     if self.panelDic[panelName]~=nil then
-        return
+        return self.panelDic[panelName]
     end
     --从AB包内加载对应的面板并实例化出来
     local panelObj = ABMgr:LoadRes("uiprefab",panelName,typeof(GameObject))
@@ -30,4 +30,9 @@ function UIMgr:HidePanel(panelName)
     GameObject.Destroy(self.panelDic[panelName].obj)
     --设置为空
     self.panelDic[panelName] = nil
+end
+function UIMgr:GetPanel(panelName)
+    if self.panelDic[panelName]~=nil then
+        return self.panelDic[panelName]
+    end
 end

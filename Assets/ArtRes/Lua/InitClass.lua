@@ -13,6 +13,13 @@ Resources = CS.UnityEngine.Resources
 Transform = CS.UnityEngine.Transform
 RectTransform = CS.UnityEngine.RectTransform
 TextAsset = CS.UnityEngine.TextAsset
+Animator = CS.UnityEngine.Animator
+RuntimeAnimatorController = CS.UnityEngine.RuntimeAnimatorController
+Sprite = CS.UnityEngine.Sprite
+RenderTexture = CS.UnityEngine.RenderTexture
+Camera = CS.UnityEngine.Camera
+
+persistentDataPath = CS.UnityEngine.Application.persistentDataPath
 --图集对象类
 SpriteAtlas = CS.UnityEngine.U2D.SpriteAtlas
 
@@ -27,12 +34,14 @@ Button = UI.Button
 Toggle = UI.Toggle
 Slider = UI.Slider
 ScrollRect = UI.ScrollRect
+RawImage = UI.RawImage
 Canvas = GameObject.Find("Canvas").transform
-
+roleRenderCamera = GameObject.Find("Camera").transform:GetComponent(typeof(Camera))
 --UI脚本初始化
 require("MainPanel")
 require("SetPanel")
 require("StartPanel")
+require("RoleGrid")
 
 --管理器初始化
 require("UIMgr")
