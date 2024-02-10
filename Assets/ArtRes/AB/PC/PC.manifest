@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3925329240
+CRC: 1898179616
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,4 +16,13 @@ AssetBundleManifest:
       Dependencies: {}
     Info_4:
       Name: roleicon
+      Dependencies: {}
+    Info_5:
+      Name: map
+      Dependencies: {}
+    Info_6:
+      Name: roleobj
+      Dependencies: {}
+    Info_7:
+      Name: animatorbt
       Dependencies: {}

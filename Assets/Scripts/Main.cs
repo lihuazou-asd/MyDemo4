@@ -12,8 +12,6 @@ public class Main : MonoBehaviour
         // ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
-        Slider slider;
-        
         
     }
     private void updateTips(string tip){

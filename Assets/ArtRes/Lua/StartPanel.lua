@@ -17,10 +17,26 @@ StartPanel.textDef = nil
 
 StartPanel.StartRoleAnimator = nil
 StartPanel.RoleRenderTexture = nil
-
+StartPanel.nowId = nil
 
 function StartPanel:BtnStartClick()
-    
+    UIMgr:HidePanel("StartPanel")
+    UIMgr:HidePanel("MainPanel")
+    BackImage.gameObject:SetActive(false)
+    mapObj = ABMgr:LoadRes("map","GridMap",typeof(GameObject))
+    mapObj.transform:SetParent(MainCamera,false)
+    local roleobj = RoleControl:new()
+    roleobj:Init(self.nowId)
+    print(roleobj.state)
+    GameLevelMgr:Init(roleobj)
+
+
+    tmp = {atk = 12}
+    GameLevelMgr.role:UpdateState(tmp)
+    print(RoleControl.state)
+    print(GameLevelMgr.role.state)
+
+
 end
 function StartPanel:BtnExitClick()
     UIMgr:HidePanel("StartPanel")
@@ -35,7 +51,7 @@ function StartPanel:ChangeData(i)
     self.textCrd.text = GameDataMgr.PlayerInfos[i].crd
     self.textDef.text = GameDataMgr.PlayerInfos[i].def
     self.textName.text = GameDataMgr.PlayerInfos[i].name
-
+    self.nowId = i;
     self.StartRoleAnimator.runtimeAnimatorController = ABMgr:LoadRes("animatorstart","Animator_"..i.."_StartPanel",typeof(RuntimeAnimatorController))
 
 end
@@ -82,7 +98,6 @@ function StartPanel:Init(obj)
     self.RoleRenderTexture.texture = renderTexture
     roleRenderCamera.targetTexture = renderTexture
     self:ChangeData(1)
-
     
 
 end

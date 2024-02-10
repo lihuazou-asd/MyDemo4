@@ -11,7 +11,6 @@ function GameDataMgr:Init()
     if tmpStr~=nil then
         GameDataMgr.MusicData = Json.decode(tmpStr)
     end
-    
 end
 
 function GameDataMgr:PlayerInfosDeCode(luaName,resName,type)

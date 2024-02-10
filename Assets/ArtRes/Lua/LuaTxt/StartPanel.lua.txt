@@ -17,10 +17,17 @@ StartPanel.textDef = nil
 
 StartPanel.StartRoleAnimator = nil
 StartPanel.RoleRenderTexture = nil
-
+StartPanel.nowId = nil
 
 function StartPanel:BtnStartClick()
-    
+    UIMgr:HidePanel("StartPanel")
+    UIMgr:HidePanel("MainPanel")
+    BackImage:SetActive(false)
+    mapObj = ABMgr:LoadRes("map","GridMap",typeof(GameObject))
+    mapObj.transform:SetPanel(MainCamera,false)
+    roleobj = RoleControl:new()
+    roleobj:Init(self.nowId)
+
 end
 function StartPanel:BtnExitClick()
     UIMgr:HidePanel("StartPanel")
@@ -35,7 +42,7 @@ function StartPanel:ChangeData(i)
     self.textCrd.text = GameDataMgr.PlayerInfos[i].crd
     self.textDef.text = GameDataMgr.PlayerInfos[i].def
     self.textName.text = GameDataMgr.PlayerInfos[i].name
-
+    self.nowId = i;
     self.StartRoleAnimator.runtimeAnimatorController = ABMgr:LoadRes("animatorstart","Animator_"..i.."_StartPanel",typeof(RuntimeAnimatorController))
 
 end
@@ -78,9 +85,10 @@ function StartPanel:Init(obj)
         local grid = RoleGrid:new()
         grid:Init(obj,i,self.svTransform)
     end
-
+    local renderTexture = ABMgr:LoadRes("uiprefab","RoleRenderTexture",typeof(RenderTexture))
+    self.RoleRenderTexture.texture = renderTexture
+    roleRenderCamera.targetTexture = renderTexture
     self:ChangeData(1)
-
-    self.RoleRenderTexture.texture = ABMgr("uiprefab","RoleRenderTexture",typeof(RenderTexture))
+    
 
 end

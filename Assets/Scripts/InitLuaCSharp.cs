@@ -15,6 +15,7 @@ public static class InitLuaCSharp
 
     [LuaCallCSharp]
     public static List<Type> luaCallCSharpList = new List<Type>(){
-        typeof(GameObject)
+        typeof(GameObject),
+        typeof(LuaMonoObj)
     };
 }

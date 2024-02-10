@@ -19,6 +19,7 @@ Sprite = CS.UnityEngine.Sprite
 RenderTexture = CS.UnityEngine.RenderTexture
 Camera = CS.UnityEngine.Camera
 
+MainCamera = GameObject.Find("MainCamera").transform
 persistentDataPath = CS.UnityEngine.Application.persistentDataPath
 --图集对象类
 SpriteAtlas = CS.UnityEngine.U2D.SpriteAtlas
@@ -37,14 +38,17 @@ ScrollRect = UI.ScrollRect
 RawImage = UI.RawImage
 Canvas = GameObject.Find("Canvas").transform
 roleRenderCamera = GameObject.Find("Camera").transform:GetComponent(typeof(Camera))
+BackImage = Canvas:Find("RawImage")
 --UI脚本初始化
 require("MainPanel")
 require("SetPanel")
 require("StartPanel")
 require("RoleGrid")
-
+--角色Mono初始化
+require("RoleControl")
 --管理器初始化
 require("UIMgr")
+require("GameLevelMgr")
 
 --读取json文件
 require("GameDataMgr")
@@ -54,3 +58,6 @@ require("GameDataMgr")
 ABMgr = CS.ABMgr.GetInstance()
 
 ABUpdateMgr = CS.ABUpdateMgr.Instance
+
+LuaMonoObj = CS.LuaMonoObj
+E_LifeFun_Type = CS.E_LifeFun_Type

@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 388397457
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a8f95ad09f0fa1fb59c4748fdf2d2aee
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 54c4ae8f8d64e90365a7c87c3f14631d
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: a8f95ad09f0fa1fb59c4748fdf2d2aee
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 60
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/ArtRes/Prefab/RoleRes/RoleObj/PlayRole.prefab
+Dependencies: []
