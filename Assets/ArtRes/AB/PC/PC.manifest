@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1898179616
+CRC: 4248656119
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -25,4 +25,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_7:
       Name: animatorbt
+      Dependencies: {}
+    Info_8:
+      Name: weapon
       Dependencies: {}

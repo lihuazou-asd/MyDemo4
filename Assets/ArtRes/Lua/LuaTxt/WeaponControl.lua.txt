@@ -1,0 +1,20 @@
+WeaponControl = Object:subClass("WeaponControl")
+
+WeaponControl.obj = nil
+WeaponControl.luaObj = nil
+WeaponControl.weaponIcon = nil
+WeaponControl.state = {atk = nil,bld = nil,dod = nil,spd = nil,crt = nil,crd = nil,def = nil,name = nil}
+
+
+
+function WeaponControl:Init(id,obj)
+    self.obj = obj
+    self.weaponIcon = obj.transform:GetComponent(typeof(Image))
+    self.weaponIcon.sprite = ABMgr:LoadRes("weapon","Weapon_"..id,typeof(Sprite))
+
+
+    self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
+    self.Awake()
+    self.luaObj:AddOrRemoveListener(self.Update,E_LifeFun_Type.Update)
+end
+

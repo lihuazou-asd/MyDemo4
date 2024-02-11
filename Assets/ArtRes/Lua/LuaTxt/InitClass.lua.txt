@@ -18,6 +18,9 @@ RuntimeAnimatorController = CS.UnityEngine.RuntimeAnimatorController
 Sprite = CS.UnityEngine.Sprite
 RenderTexture = CS.UnityEngine.RenderTexture
 Camera = CS.UnityEngine.Camera
+Time = CS.UnityEngine.Time
+--输入控制
+Input = CS.UnityEngine.Input
 
 MainCamera = GameObject.Find("MainCamera").transform
 persistentDataPath = CS.UnityEngine.Application.persistentDataPath
@@ -46,8 +49,10 @@ require("StartPanel")
 require("RoleGrid")
 --角色Mono初始化
 require("RoleControl")
+require("WeaponControl")
 --管理器初始化
 require("UIMgr")
+require("GameLevelMgr")
 
 --读取json文件
 require("GameDataMgr")

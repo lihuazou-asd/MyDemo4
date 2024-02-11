@@ -18,6 +18,9 @@ RuntimeAnimatorController = CS.UnityEngine.RuntimeAnimatorController
 Sprite = CS.UnityEngine.Sprite
 RenderTexture = CS.UnityEngine.RenderTexture
 Camera = CS.UnityEngine.Camera
+Time = CS.UnityEngine.Time
+--输入控制
+Input = CS.UnityEngine.Input
 
 MainCamera = GameObject.Find("MainCamera").transform
 persistentDataPath = CS.UnityEngine.Application.persistentDataPath
@@ -39,6 +42,10 @@ RawImage = UI.RawImage
 Canvas = GameObject.Find("Canvas").transform
 roleRenderCamera = GameObject.Find("Camera").transform:GetComponent(typeof(Camera))
 BackImage = Canvas:Find("RawImage")
+
+--2D物体相关
+SpriteRenderer = CS.UnityEngine.SpriteRenderer
+Space = CS.UnityEngine.Space
 --UI脚本初始化
 require("MainPanel")
 require("SetPanel")
@@ -46,6 +53,7 @@ require("StartPanel")
 require("RoleGrid")
 --角色Mono初始化
 require("RoleControl")
+require("WeaponControl")
 --管理器初始化
 require("UIMgr")
 require("GameLevelMgr")

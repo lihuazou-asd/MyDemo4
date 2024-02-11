@@ -22,11 +22,20 @@ StartPanel.nowId = nil
 function StartPanel:BtnStartClick()
     UIMgr:HidePanel("StartPanel")
     UIMgr:HidePanel("MainPanel")
-    BackImage:SetActive(false)
+    BackImage.gameObject:SetActive(false)
     mapObj = ABMgr:LoadRes("map","GridMap",typeof(GameObject))
-    mapObj.transform:SetPanel(MainCamera,false)
-    roleobj = RoleControl:new()
+    mapObj.transform:SetParent(MainCamera,false)
+    local roleobj = RoleControl:new()
     roleobj:Init(self.nowId)
+    print(roleobj.state)
+    GameLevelMgr:Init(roleobj)
+
+
+    tmp = {atk = 12}
+    GameLevelMgr.role:UpdateState(tmp)
+    print(RoleControl.state)
+    print(GameLevelMgr.role.state)
+
 
 end
 function StartPanel:BtnExitClick()
