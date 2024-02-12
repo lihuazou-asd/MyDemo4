@@ -6,6 +6,8 @@ require("Object")
 require("SplitTools")
 --Json解析
 Json = require("JsonUtility")
+--协程
+util = require("util")
 
 --Unity相关的
 GameObject = CS.UnityEngine.GameObject
@@ -19,6 +21,7 @@ Sprite = CS.UnityEngine.Sprite
 RenderTexture = CS.UnityEngine.RenderTexture
 Camera = CS.UnityEngine.Camera
 Time = CS.UnityEngine.Time
+WaitForSeconds = CS.UnityEngine.WaitForSeconds
 --输入控制
 Input = CS.UnityEngine.Input
 

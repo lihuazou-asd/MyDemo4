@@ -5,15 +5,16 @@ GameDataMgr = _G["GameDataMgr"]
 GameDataMgr.PlayerInfos = {}
 GameDataMgr.MusicData = {bgmData = 50,btmData = 50}
 
+
 function GameDataMgr:Init()
-    GameDataMgr.PlayerInfos = GameDataMgr:PlayerInfosDeCode("json","PlayerInfos",typeof(TextAsset))
+    GameDataMgr.PlayerInfos = GameDataMgr:InfosDeCode("json","PlayerInfos",typeof(TextAsset))
     local tmpStr = self:ReadText(persistentDataPath.."/MusicData.json","r")
     if tmpStr~=nil then
         GameDataMgr.MusicData = Json.decode(tmpStr)
     end
 end
 
-function GameDataMgr:PlayerInfosDeCode(luaName,resName,type)
+function GameDataMgr:InfosDeCode(luaName,resName,type)
     local txt = ABMgr:LoadRes(luaName,resName,type)
     local playList = Json.decode(txt.text)
     local PlayerInfo = {}

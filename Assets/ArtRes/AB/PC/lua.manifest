@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 31989482
+CRC: 1541467778
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 84e01d4cfec85ececa32243e170a09e0
+    Hash: af899ead7276877f7c741153f809aa25
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 84e01d4cfec85ececa32243e170a09e0
+    Hash: af899ead7276877f7c741153f809aa25
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -21,6 +21,7 @@ Assets:
 - Assets/ArtRes/Lua/LuaTxt/StartPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/JsonUtility.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/Object.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/util.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/ReadJson.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/PlayerInfo.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GameLevelMgr.lua.txt

@@ -28,13 +28,13 @@ function StartPanel:BtnStartClick()
     local roleobj = RoleControl:new()
     roleobj:Init(self.nowId)
     print(roleobj.state)
-    GameLevelMgr:Init(roleobj)
+    local gameLevelInfo = GameDataMgr:InfosDeCode("json","GameLevelInfo",typeof(TextAsset))
+    local monsterInfo = GameDataMgr:InfosDeCode("json","MonsterInfo",typeof(TextAsset))
+    GameLevelMgrInstance = GameLevelMgr:new()
+    GameLevelMgrInstance:Init(GameObject("GameLevelMgr"),roleobj,gameLevelInfo,monsterInfo)
 
 
-    tmp = {atk = 12}
-    GameLevelMgr.role:UpdateState(tmp)
-    print(RoleControl.state)
-    print(GameLevelMgr.role.state)
+    
 
 
 end

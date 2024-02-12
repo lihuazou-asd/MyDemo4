@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ public class Main : MonoBehaviour
         LuaMgr.GetInstance().DoLuaFile("Main");
         // SpriteRenderer spriteRenderer = new SpriteRenderer();
         // spriteRenderer.flipX = 
+        // gameObject.transform.LookAt()
     }
     private void updateTips(string tip){
         print(tip);
