@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 3364134097
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: f55eafbe5324f9fe4b237b5a989368af
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 669c3c998a00f8934b0044b204b50272
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: f55eafbe5324f9fe4b237b5a989368af
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/ArtRes/Prefab/MonsterRes/Animator/2/Animator_2_Monster.controller
+- Assets/ArtRes/Prefab/MonsterRes/Animator/1/Animator_1_Monster.controller
+Dependencies: []

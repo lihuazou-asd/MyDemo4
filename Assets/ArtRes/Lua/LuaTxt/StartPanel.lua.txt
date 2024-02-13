@@ -25,13 +25,13 @@ function StartPanel:BtnStartClick()
     BackImage.gameObject:SetActive(false)
     mapObj = ABMgr:LoadRes("map","GridMap",typeof(GameObject))
     mapObj.transform:SetParent(MainCamera,false)
-    local roleobj = RoleControl:new()
-    roleobj:Init(self.nowId)
-    print(roleobj.state)
+    local roleControl = RoleControl:new()
+    roleControl:Init(self.nowId)
+    print(roleControl.state)
     local gameLevelInfo = GameDataMgr:InfosDeCode("json","GameLevelInfo",typeof(TextAsset))
     local monsterInfo = GameDataMgr:InfosDeCode("json","MonsterInfo",typeof(TextAsset))
     GameLevelMgrInstance = GameLevelMgr:new()
-    GameLevelMgrInstance:Init(GameObject("GameLevelMgr"),roleobj,gameLevelInfo,monsterInfo)
+    GameLevelMgrInstance:Init(GameObject("GameLevelMgr"),roleControl,gameLevelInfo,monsterInfo)
 
 
     

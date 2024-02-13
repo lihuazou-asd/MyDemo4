@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 1541467778
+CRC: 2426048875
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: af899ead7276877f7c741153f809aa25
+    Hash: 3bffcd98f4da8b6acc45cc380caafbed
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: af899ead7276877f7c741153f809aa25
+    Hash: 3bffcd98f4da8b6acc45cc380caafbed
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -17,6 +17,7 @@ ClassTypes:
 SerializeReferenceClassIdentifiers: []
 Assets:
 - Assets/ArtRes/Lua/LuaTxt/SetPanel.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/MonsterControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GameDataMgr.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/StartPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/JsonUtility.lua.txt

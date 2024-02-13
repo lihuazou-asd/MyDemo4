@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 2201691146
+CRC: 696395488
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -28,4 +28,10 @@ AssetBundleManifest:
       Dependencies: {}
     Info_8:
       Name: weapon
+      Dependencies: {}
+    Info_9:
+      Name: monsterobj
+      Dependencies: {}
+    Info_10:
+      Name: monsteranimator
       Dependencies: {}

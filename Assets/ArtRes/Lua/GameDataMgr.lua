@@ -4,10 +4,11 @@ GameDataMgr = _G["GameDataMgr"]
 
 GameDataMgr.PlayerInfos = {}
 GameDataMgr.MusicData = {bgmData = 50,btmData = 50}
-
+GameDataMgr.MonsterInfos = {}
 
 function GameDataMgr:Init()
     GameDataMgr.PlayerInfos = GameDataMgr:InfosDeCode("json","PlayerInfos",typeof(TextAsset))
+    GameDataMgr.MonsterInfos = GameDataMgr:InfosDeCode("json","MonsterInfo",typeof(TextAsset))
     local tmpStr = self:ReadText(persistentDataPath.."/MusicData.json","r")
     if tmpStr~=nil then
         GameDataMgr.MusicData = Json.decode(tmpStr)

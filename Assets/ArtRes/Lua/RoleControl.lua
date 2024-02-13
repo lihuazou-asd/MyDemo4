@@ -6,6 +6,9 @@ RoleControl.weaponTables = {}
 RoleControl.luaObj = nil
 RoleControl.animator = nil
 RoleControl.spriteRenderer = nil
+RoleControl.rigid = nil
+
+RoleControl.nearMonsterControl = nil
 
 RoleControl.state = {atk = nil,bld = nil,dod = nil,spd = nil,crt = nil,crd = nil,def = nil,name = nil}
 
@@ -17,24 +20,38 @@ function RoleControl:Start()
 
 end
 function RoleControl:Update()
-    if Input.GetKey("w") then
-        self.obj.transform:Translate(Vector3.up*Time.deltaTime*5,Space.self);
+    if self.nearMonsterControl ~= nil then
+        self.weaponTables.obj1:LookAt(self.nearMonsterControl,Time.deltaTime)
+        self.weaponTables.obj2:LookAt(self.nearMonsterControl,Time.deltaTime)
     end
-    if Input.GetKey("s") then
-        self.obj.transform:Translate(-Vector3.up*Time.deltaTime*5,Space.self);
+
+    if Input.GetKey(KeyCode.W) then
+        self.rigid.velocity = Vector2(self.rigid.velocity.x, 5);
     end
-    if Input.GetKey("a") then
-        self.obj.transform:Translate(-Vector3.right*Time.deltaTime*5,Space.self);
+    if Input.GetKey(KeyCode.S) then
+        self.rigid.velocity = Vector2(self.rigid.velocity.x, -5);
+    end
+    if Input.GetKey(KeyCode.A) then
+        self.rigid.velocity = Vector2(-5,self.rigid.velocity.y);
         self.spriteRenderer.flipX = true
-        self.weaponTables.obj1:flipX(true)
-        self.weaponTables.obj2:flipX(true)
     end
-    if Input.GetKey("d") then
-        self.obj.transform:Translate(Vector3.right*Time.deltaTime*5,Space.self);
+    if Input.GetKey(KeyCode.D) then
+        self.rigid.velocity = Vector2(5,self.rigid.velocity.y);
         self.spriteRenderer.flipX = false
-        self.weaponTables.obj1:flipX(false)
-        self.weaponTables.obj2:flipX(false)
     end
+    if Input.GetKeyUp(KeyCode.W) then
+        self.rigid.velocity = Vector2(0,0);
+    end
+    if Input.GetKeyUp(KeyCode.S) then
+        self.rigid.velocity = Vector2(0,0);
+    end
+    if Input.GetKeyUp(KeyCode.A) then
+        self.rigid.velocity = Vector2(0,0);
+    end
+    if Input.GetKeyUp(KeyCode.D) then
+        self.rigid.velocity = Vector2(0,0);
+    end
+    
 
     if Input.GetKey("space") then
         print(1)
@@ -57,6 +74,7 @@ function RoleControl:OnDestroy()
 end
 
 function RoleControl:Init(id)
+    self.nearMonsterTransform = nil;
     self.id = id
     self.obj = ABMgr:LoadRes("roleobj","PlayRole",typeof(GameObject))
     self.weaponTables = {}
@@ -64,8 +82,9 @@ function RoleControl:Init(id)
     self.weaponTables.obj2 = WeaponControl:new()
     self.weaponTables.obj1:Init(id,self.obj.transform:Find("Weapon1").gameObject)
     self.weaponTables.obj2:Init(id,self.obj.transform:Find("Weapon2").gameObject)
-    self.obj.transform:SetParent(MainCamera)
+    self.obj.transform:SetParent(MainCamera,false)
     self.animator = self.obj.transform:GetComponent(typeof(Animator))
+    self.rigid = self.obj.transform:GetComponent(typeof(Rigidbody2D))
     self.state = {}
     self:InitData(id)
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))

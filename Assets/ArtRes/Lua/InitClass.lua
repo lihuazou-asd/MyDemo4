@@ -22,10 +22,14 @@ RenderTexture = CS.UnityEngine.RenderTexture
 Camera = CS.UnityEngine.Camera
 Time = CS.UnityEngine.Time
 WaitForSeconds = CS.UnityEngine.WaitForSeconds
+KeyCode = CS.UnityEngine.KeyCode
+Quaternion = CS.UnityEngine.Quaternion
+Rigidbody2D = CS.UnityEngine.Rigidbody2D
 --输入控制
 Input = CS.UnityEngine.Input
 
 MainCamera = GameObject.Find("MainCamera").transform
+MainCameraComponent = MainCamera:GetComponent("Camera")
 persistentDataPath = CS.UnityEngine.Application.persistentDataPath
 --图集对象类
 SpriteAtlas = CS.UnityEngine.U2D.SpriteAtlas
@@ -57,6 +61,8 @@ require("RoleGrid")
 --角色Mono初始化
 require("RoleControl")
 require("WeaponControl")
+--怪物Mono初始化
+require("MonsterControl")
 --管理器初始化
 require("UIMgr")
 require("GameLevelMgr")
