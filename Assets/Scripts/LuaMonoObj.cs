@@ -14,6 +14,7 @@ public class LuaMonoObj : MonoBehaviour
     private UnityAction onEnable;
     private UnityAction onDisable;
     private UnityAction onDestroy;
+    private UnityAction<Collider2D> onTriggerEnter2D;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +71,12 @@ public class LuaMonoObj : MonoBehaviour
             onDisable();
         }
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(onTriggerEnter2D!=null){
+            onTriggerEnter2D(other);
+        }
+    }
 
     /// <summary>
     /// This function is called when the MonoBehaviour will be destroyed.
@@ -86,6 +93,23 @@ public class LuaMonoObj : MonoBehaviour
         onDisable = null;
         onEnable = null;
         onDestroy = null; 
+        onTriggerEnter2D = null;
+    }
+
+    /// <summary>
+    /// Sent when another object enters a trigger collider attached to this
+    /// object (2D physics only).
+    /// </summary>
+    /// <param name="other">The other Collider2D involved in this collision.</param>
+    
+    public void AddOrRemovePhysicsListener(UnityAction<Collider2D> fun,E_LifeFun_Type type,bool IsAdd = true){
+        switch (type)
+        {
+            case E_LifeFun_Type.OnTriggerEnter2D:
+                if(IsAdd) onTriggerEnter2D+=fun;
+                else onTriggerEnter2D -= fun;
+                break;
+        }
     }
 
     public void AddOrRemoveListener(UnityAction fun,E_LifeFun_Type type,bool IsAdd = true){
@@ -132,4 +156,5 @@ public enum E_LifeFun_Type{
     OnEnable,
     OnDestroy,
     OnDisable,
+    OnTriggerEnter2D,
 }

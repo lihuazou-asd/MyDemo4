@@ -14,9 +14,6 @@ public class Main : MonoBehaviour
         // ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
-        // SpriteRenderer spriteRenderer = new SpriteRenderer();
-        // spriteRenderer.flipX = 
-        // gameObject.transform.LookAt()
         
     }
     private void updateTips(string tip){

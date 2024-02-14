@@ -25,6 +25,7 @@ WaitForSeconds = CS.UnityEngine.WaitForSeconds
 KeyCode = CS.UnityEngine.KeyCode
 Quaternion = CS.UnityEngine.Quaternion
 Rigidbody2D = CS.UnityEngine.Rigidbody2D
+Collider2D = CS.UnityEngine.Collider2D
 --输入控制
 Input = CS.UnityEngine.Input
 
@@ -63,6 +64,8 @@ require("RoleControl")
 require("WeaponControl")
 --怪物Mono初始化
 require("MonsterControl")
+--子弹Mono初始化
+require("BulletControl")
 --管理器初始化
 require("UIMgr")
 require("GameLevelMgr")

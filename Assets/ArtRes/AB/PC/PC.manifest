@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 696395488
+CRC: 1551104891
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -34,4 +34,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_10:
       Name: monsteranimator
+      Dependencies: {}
+    Info_11:
+      Name: bullet
       Dependencies: {}

@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2308059399
+CRC: 4015555898
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 998739af10d24c0ac15ee969f03d47b3
+    Hash: 11144dc297b8153bff3190aec40c2620
   TypeTreeHash:
     serializedVersion: 2
     Hash: 669c3c998a00f8934b0044b204b50272
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 998739af10d24c0ac15ee969f03d47b3
+    Hash: 11144dc297b8153bff3190aec40c2620
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -22,5 +22,6 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/ArtRes/Prefab/RoleRes/AnimatorBt/1/Animator_1_Weapon.controller
 - Assets/ArtRes/Prefab/RoleRes/AnimatorBt/1/Animator_1_Bt.controller
 Dependencies: []

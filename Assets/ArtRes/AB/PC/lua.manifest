@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2426048875
+CRC: 4251026727
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3bffcd98f4da8b6acc45cc380caafbed
+    Hash: 060bc57fa143a647d1c3cf9c1a4357bb
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 3bffcd98f4da8b6acc45cc380caafbed
+    Hash: 060bc57fa143a647d1c3cf9c1a4357bb
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -26,6 +26,7 @@ Assets:
 - Assets/ArtRes/Lua/LuaTxt/ReadJson.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/PlayerInfo.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GameLevelMgr.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/BulletControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/MainPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/RoleControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/SplitTools.lua.txt

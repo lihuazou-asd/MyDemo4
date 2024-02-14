@@ -9,16 +9,13 @@ end
 function GameLevelMgr:Update()
     if self.isBattle then
         self.Time = self.Time + Time.deltaTime
-        if self.nowWave > self.nowLevelMaxWave then
-            return
-        else 
-            if self.Time > self.waveInfo[self.nowLevel][self.nowWave].time then
-                local tmpWave = self.nowWave
-                self.luaObj:StartCoroutine(util.cs_generator(function() self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  end))
-                self.nowWave = self.nowWave+1
-            end
+        if self.nowWave <= self.nowLevelMaxWave and self.Time > self.waveInfo[self.nowLevel][self.nowWave].time then
+            local tmpWave = self.nowWave
+            self.luaObj:StartCoroutine(util.cs_generator(function() self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  end))
+            self.nowWave = self.nowWave+1
         end
-        if self.Time > self.levelInfo[self.nowLevel].time or self.levelInfo[self.nowLevel].num == self.killMonster then
+        if self.levelInfo[self.nowLevel].nums == self.killMonster or self.Time > self.levelInfo[self.nowLevel].time then
+            print("战斗停止")
             self.isBattle = false
             self.Time = 0
         end
@@ -71,10 +68,6 @@ function GameLevelMgr:Init(obj,roleContrl,levelInfo,monstersInfo)
     self.nowLevelMaxWave = #self.waveInfo[1]
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
     self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
-
-
-
-
 end
 
 function GameLevelMgr:NextLevel(id)
@@ -115,6 +108,3 @@ function GameLevelMgr:ShowChoosePanel()
 
 
 end
-
-
-

@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 147026082
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 76ffab6285d2b31b41c8b944e57bfaa4
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 7c54188c45a701c442e46fa54aee5d9f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 76ffab6285d2b31b41c8b944e57bfaa4
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/ArtRes/Prefab/RoleRes/Bullet/BulletObj.prefab
+- Assets/ArtRes/Prefab/RoleRes/Bullet/1/bullet_1.PNG
+Dependencies: []
