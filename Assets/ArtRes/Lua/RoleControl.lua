@@ -11,6 +11,8 @@ RoleControl.atkTimeOffset = 0
 RoleControl.atkTimeDelay = 1
 RoleControl.isAtk = false
 RoleControl.nearMonsterControl = nil
+RoleControl.txtBld = nil
+RoleControl.gamePanel = nil
 
 RoleControl.state = {atk = nil,bld = nil,dod = nil,spd = nil,crt = nil,crd = nil,def = nil,name = nil}
 
@@ -19,10 +21,13 @@ function RoleControl:Awake()
 
 end
 function RoleControl:Start()
-
+    if self.gamePanel == nil then
+        self.gamePanel=UIMgr:GetPanel("GamePanel")
+    end
 end
 function RoleControl:Update()
     if GameLevelMgrInstance.isBattle then
+        self.gamePanel:UpdateTime()
         self.atkTimeOffset = self.atkTimeOffset + Time.deltaTime
         if Input.GetKey(KeyCode.W) then
             self.rigid.velocity = Vector2(self.rigid.velocity.x, 5)
@@ -65,7 +70,8 @@ function RoleControl:Update()
             self.luaObj:StartCoroutine(util.cs_generator(function() self:cancelIsAtk(0.5) end))
         end
     else 
-        self.rigid.velocity = Vector2(0,0);
+        self.rigid.velocity = Vector2(0,0)
+        self.animator:SetInteger('SpeedInt',0)
     end
 end
 function RoleControl:FixedUpdate()
@@ -73,8 +79,8 @@ function RoleControl:FixedUpdate()
 end
 function RoleControl:LateUpdate()
     if self.nearMonsterControl ~= nil and self.isAtk == false then
-        self.weaponTables.obj1:LookAt(self.nearMonsterControl,Time.deltaTime)
-        self.weaponTables.obj2:LookAt(self.nearMonsterControl,Time.deltaTime)
+        self.weaponTables.obj1Control:LookAt(self.nearMonsterControl,Time.deltaTime)
+        self.weaponTables.obj2Control:LookAt(self.nearMonsterControl,Time.deltaTime)
     end
 end
 function RoleControl:OnEnable()
@@ -91,12 +97,13 @@ function RoleControl:Init(id)
     self.isAtk = false
     self.nearMonsterTransform = nil;
     self.id = id
+    self.gamePanel = nil
     self.obj = ABMgr:LoadRes("roleobj","PlayRole",typeof(GameObject))
     self.weaponTables = {}
-    self.weaponTables.obj1 = WeaponControl:new()
-    self.weaponTables.obj2 = WeaponControl:new()
-    self.weaponTables.obj1:Init(id,self.obj.transform:Find("Weapon1").gameObject)
-    self.weaponTables.obj2:Init(id,self.obj.transform:Find("Weapon2").gameObject)
+    self.weaponTables.obj1Control = WeaponControl:new()
+    self.weaponTables.obj2Control = WeaponControl:new()
+    self.weaponTables.obj1Control:Init(id,self.obj.transform:Find("FatherWeapon1").gameObject,1)
+    self.weaponTables.obj2Control:Init(id,self.obj.transform:Find("FatherWeapon2").gameObject,2)
     self.obj.transform:SetParent(MainCamera,false)
     self.animator = self.obj.transform:GetComponent(typeof(Animator))
     self.rigid = self.obj.transform:GetComponent(typeof(Rigidbody2D))
@@ -105,6 +112,7 @@ function RoleControl:Init(id)
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
     self.spriteRenderer = self.obj.transform:GetComponent(typeof(SpriteRenderer))
     self.Awake()
+    self.luaObj:AddOrRemoveListener(function() self:Start() end,E_LifeFun_Type.Start)
     self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
     self.luaObj:AddOrRemoveListener(function() self:LateUpdate() end,E_LifeFun_Type.LateUpdate)
 end
@@ -120,34 +128,33 @@ function RoleControl:InitData(id)
     self.state.name = GameDataMgr.PlayerInfos[id].name
 end
 function RoleControl:Atk()
-    self.weaponTables.obj1:Atk()
-    self.weaponTables.obj2:Atk()
+    self.weaponTables.obj1Control:Atk()
+    self.weaponTables.obj2Control:Atk()
 end
-function RoleControl:UpdateWeapon(weapon)
-    for i = 1,2 do
-        if self.weapon[i] == nil then
-            self.weapon[i] = weapon
-            break
-        end
-    end
-end
+
 
 function RoleControl:UpdateState(obj)
     for k,v in pairs(obj) do
-        self.state[k]  = self.state[k] + v
+        if k ~= "name" then
+            self.state[k]  = self.state[k] + v
+        end
     end
 end
 
 function RoleControl:Hurt(dmg)
     self.state.bld = self.state.bld - dmg
-    print(self.state.bld)
     if self.state.bld<=0 then 
+        self.state.bld = 0
         self.animator:SetBool("DeadBool",true)
         GameLevelMgrInstance.isBattle = false
     else
         self.animator:SetTrigger("HurtTrigger")
     end
+    self.gamePanel:ChangeValue(self.state.bld)
 
+end
+function RoleControl:GetTxtBld()
+    return UIMgr:GetPanel("GamePanel").txtBld
 end
 
 function RoleControl:cancelIsAtk(time)

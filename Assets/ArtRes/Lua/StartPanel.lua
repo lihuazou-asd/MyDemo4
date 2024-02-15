@@ -33,6 +33,7 @@ function StartPanel:BtnStartClick()
     GameLevelMgrInstance = GameLevelMgr:new()
     GameLevelMgrInstance:Init(GameObject("GameLevelMgr"),roleControl,gameLevelInfo,monsterInfo)
 
+    UIMgr:ShowPanel("GamePanel")
 
     
 

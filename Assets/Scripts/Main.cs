@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Main : MonoBehaviour
@@ -14,7 +15,12 @@ public class Main : MonoBehaviour
         // ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
-        
+        // Button button;
+        // EventTrigger trigger = GetComponent<EventTrigger>();
+        // EventTrigger.Entry entry = new EventTrigger.Entry();
+        // entry.eventID = EventTriggerType.PointerEnter;
+        // entry.callback.AddListener((data) => { luaFunction.Call(); });
+        // trigger.triggers.Add(entry);
     }
     private void updateTips(string tip){
         print(tip);

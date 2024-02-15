@@ -59,6 +59,8 @@ require("MainPanel")
 require("SetPanel")
 require("StartPanel")
 require("RoleGrid")
+require("GamePanel")
+require("ChoosePanel")
 --角色Mono初始化
 require("RoleControl")
 require("WeaponControl")

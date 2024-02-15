@@ -22,49 +22,50 @@ function RoleControl:Start()
 
 end
 function RoleControl:Update()
-    self.atkTimeOffset = self.atkTimeOffset + Time.deltaTime
-    
-
-    if Input.GetKey(KeyCode.W) then
-        self.rigid.velocity = Vector2(self.rigid.velocity.x, 5);
-        self.animator:SetFloat('Speed',1)
-    end
-    if Input.GetKey(KeyCode.S) then
-        self.rigid.velocity = Vector2(self.rigid.velocity.x, -5);
-        self.animator:SetFloat("Speed",1.0)
-    end
-    if Input.GetKey(KeyCode.A) then
-        self.rigid.velocity = Vector2(-5,self.rigid.velocity.y);
-        self.animator:SetFloat("Speed",1.0)
-        self.spriteRenderer.flipX = true
-    end
-    if Input.GetKey(KeyCode.D) then
-        self.rigid.velocity = Vector2(5,self.rigid.velocity.y);
-        self.animator:SetFloat("Speed",1.0)
-        self.spriteRenderer.flipX = false
-    end
-    if Input.GetKeyUp(KeyCode.W) then
+    if GameLevelMgrInstance.isBattle then
+        self.atkTimeOffset = self.atkTimeOffset + Time.deltaTime
+        if Input.GetKey(KeyCode.W) then
+            self.rigid.velocity = Vector2(self.rigid.velocity.x, 5)
+            self.animator:SetInteger('SpeedInt',1)
+        end
+        if Input.GetKey(KeyCode.S) then
+            self.rigid.velocity = Vector2(self.rigid.velocity.x, -5)
+            self.animator:SetInteger('SpeedInt',1)
+        end
+        if Input.GetKey(KeyCode.A) then
+            self.rigid.velocity = Vector2(-5,self.rigid.velocity.y)
+            self.animator:SetInteger('SpeedInt',1)
+            self.spriteRenderer.flipX = true
+        end
+        if Input.GetKey(KeyCode.D) then
+            self.rigid.velocity = Vector2(5,self.rigid.velocity.y)
+            self.animator:SetInteger('SpeedInt',1)
+            self.spriteRenderer.flipX = false
+        end
+        if Input.GetKeyUp(KeyCode.W) then
+            self.rigid.velocity = Vector2(0,0)
+            self.animator:SetInteger('SpeedInt',0)
+        end
+        if Input.GetKeyUp(KeyCode.S) then
+            self.rigid.velocity = Vector2(0,0)
+            self.animator:SetInteger('SpeedInt',0)
+        end
+        if Input.GetKeyUp(KeyCode.A) then
+            self.rigid.velocity = Vector2(0,0)
+            self.animator:SetInteger('SpeedInt',0)
+        end
+        if Input.GetKeyUp(KeyCode.D) then
+            self.rigid.velocity = Vector2(0,0)
+            self.animator:SetInteger('SpeedInt',0)
+        end
+        if Input.GetKey("space") and self.atkTimeOffset>=self.atkTimeDelay then
+            self.isAtk = true
+            self.atkTimeOffset = 0
+            self:Atk()
+            self.luaObj:StartCoroutine(util.cs_generator(function() self:cancelIsAtk(0.5) end))
+        end
+    else 
         self.rigid.velocity = Vector2(0,0);
-        self.animator:SetFloat("Speed",0)
-    end
-    if Input.GetKeyUp(KeyCode.S) then
-        self.rigid.velocity = Vector2(0,0);
-        self.animator:SetFloat("Speed",0)
-    end
-    if Input.GetKeyUp(KeyCode.A) then
-        self.rigid.velocity = Vector2(0,0);
-        self.animator:SetFloat("Speed",0)
-    end
-    if Input.GetKeyUp(KeyCode.D) then
-        self.rigid.velocity = Vector2(0,0);
-        self.animator:SetFloat('Speed',0)
-    end
-
-    if Input.GetKey("space") and self.atkTimeOffset>=self.atkTimeDelay then
-        self.isAtk = true
-        self.atkTimeOffset = 0
-        self:Atk()
-        self.luaObj:StartCoroutine(util.cs_generator(function() self:cancelIsAtk(0.5) end))
     end
 end
 function RoleControl:FixedUpdate()
@@ -92,10 +93,10 @@ function RoleControl:Init(id)
     self.id = id
     self.obj = ABMgr:LoadRes("roleobj","PlayRole",typeof(GameObject))
     self.weaponTables = {}
-    self.weaponTables.obj1 = WeaponControl:new()
-    self.weaponTables.obj2 = WeaponControl:new()
-    self.weaponTables.obj1:Init(id,self.obj.transform:Find("Weapon1").gameObject)
-    self.weaponTables.obj2:Init(id,self.obj.transform:Find("Weapon2").gameObject)
+    self.weaponTables.obj1Control = WeaponControl:new()
+    self.weaponTables.obj2Control = WeaponControl:new()
+    self.weaponTables.obj1Control:Init(id,self.obj.transform:Find("FatherWeapon1").gameObject,1)
+    self.weaponTables.obj2Control:Init(id,self.obj.transform:Find("FatherWeapon1").gameObject,2)
     self.obj.transform:SetParent(MainCamera,false)
     self.animator = self.obj.transform:GetComponent(typeof(Animator))
     self.rigid = self.obj.transform:GetComponent(typeof(Rigidbody2D))
@@ -119,8 +120,8 @@ function RoleControl:InitData(id)
     self.state.name = GameDataMgr.PlayerInfos[id].name
 end
 function RoleControl:Atk()
-    self.weaponTables.obj1:Atk()
-    self.weaponTables.obj2:Atk()
+    self.weaponTables.obj1Control:Atk()
+    self.weaponTables.obj2Control:Atk()
 end
 function RoleControl:UpdateWeapon(weapon)
     for i = 1,2 do
@@ -135,6 +136,18 @@ function RoleControl:UpdateState(obj)
     for k,v in pairs(obj) do
         self.state[k]  = self.state[k] + v
     end
+end
+
+function RoleControl:Hurt(dmg)
+    self.state.bld = self.state.bld - dmg
+    print(self.state.bld)
+    if self.state.bld<=0 then 
+        self.animator:SetBool("DeadBool",true)
+        GameLevelMgrInstance.isBattle = false
+    else
+        self.animator:SetTrigger("HurtTrigger")
+    end
+
 end
 
 function RoleControl:cancelIsAtk(time)
