@@ -16,11 +16,18 @@ public class Main : MonoBehaviour
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
         // Button button;
+        // button.transition = Selectable.Transition.None
         // EventTrigger trigger = GetComponent<EventTrigger>();
         // EventTrigger.Entry entry = new EventTrigger.Entry();
-        // entry.eventID = EventTriggerType.PointerEnter;
+        // entry.eventID = EventTriggerType.PointerExit
         // entry.callback.AddListener((data) => { luaFunction.Call(); });
+        // BaseEventData baseEventData;
+        // PointerEventData s;
+        // s.position
         // trigger.triggers.Add(entry);
+        // RectTransform rectTransform = new RectTransform();
+        
+        // rectTransform.rect.height;
     }
     private void updateTips(string tip){
         print(tip);

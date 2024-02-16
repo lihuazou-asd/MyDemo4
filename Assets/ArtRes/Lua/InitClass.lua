@@ -26,6 +26,10 @@ KeyCode = CS.UnityEngine.KeyCode
 Quaternion = CS.UnityEngine.Quaternion
 Rigidbody2D = CS.UnityEngine.Rigidbody2D
 Collider2D = CS.UnityEngine.Collider2D
+EventTrigger = CS.UnityEngine.EventSystems.EventTrigger
+EventTriggerType = CS.UnityEngine.EventSystems.EventTriggerType
+Transition = CS.UnityEngine.UI.Selectable.Transition
+RectTransform = CS.UnityEngine.RectTransform
 --输入控制
 Input = CS.UnityEngine.Input
 
@@ -37,7 +41,8 @@ SpriteAtlas = CS.UnityEngine.U2D.SpriteAtlas
 
 Vector3 = CS.UnityEngine.Vector3
 Vector2 = CS.UnityEngine.Vector2
-
+--英语转换
+ObjPropertyTranslate = require("SObjPropertyENToCN")
 --UI相关
 UI = CS.UnityEngine.UI
 Image = UI.Image
@@ -61,6 +66,9 @@ require("StartPanel")
 require("RoleGrid")
 require("GamePanel")
 require("ChoosePanel")
+require("SelectGrid")
+require("DetailPanel")
+require("PropertyGrid")
 --角色Mono初始化
 require("RoleControl")
 require("WeaponControl")

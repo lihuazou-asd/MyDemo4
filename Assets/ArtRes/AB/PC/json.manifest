@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 506758625
+CRC: 3450224615
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 67ead0096d08fab64880bcdbf3c71535
+    Hash: 502a27c7749538081e6ec1cb89ab3c27
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 67ead0096d08fab64880bcdbf3c71535
+    Hash: 502a27c7749538081e6ec1cb89ab3c27
 HashAppended: 0
 ClassTypes:
 - Class: 49
@@ -20,6 +20,7 @@ Assets:
 - Assets/ArtRes/Json/MonsterInfo.json
 - Assets/ArtRes/Json/WaveInfo_2.json
 - Assets/ArtRes/Json/PlayerInfos.json
+- Assets/ArtRes/Json/SelectObjInfos.json
 - Assets/ArtRes/Json/WaveInfo_1.json
 - Assets/ArtRes/Json/WaveInfo_3.json
 Dependencies: []

@@ -24,7 +24,7 @@ function WeaponControl:LookAt(nearMonsterControl,time)
     
     local angle =  math.deg(math.atan(nearMonsterControl.obj.transform.position.y-self.fatherObj.transform.position.y,nearMonsterControl.obj.transform.position.x-self.fatherObj.transform.position.x))
     local rotation = Quaternion.AngleAxis(angle, Vector3.forward)
-    self.obj.transform.rotation = Quaternion.Slerp(self.obj.transform.rotation, rotation, time*self.rotateSpeed);
+    self.fatherObj.transform.rotation = Quaternion.Slerp(self.fatherObj.transform.rotation, rotation, time*self.rotateSpeed);
 end
 
 function WeaponControl:Atk()

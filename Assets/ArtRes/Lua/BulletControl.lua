@@ -5,16 +5,16 @@ function BulletControl:Awake()
 
 end
 function BulletControl:Start()
-
+    self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroy(5) end))
 end
 function BulletControl:Update()
-    
+    self.obj.transform:Translate(self.obj.transform.right*Time.deltaTime*self.Speed,Space.self)
 end
 function BulletControl:FixedUpdate()
 
 end
 function BulletControl:LateUpdate()
-    self.obj.transform:Translate(self.obj.transform.right*Time.deltaTime*self.Speed,Space.self)
+    
 end
 function BulletControl:OnEnable()
 
@@ -35,7 +35,7 @@ end
 BulletControl.obj = nil
 BulletControl.renderer = nil
 BulletControl.id = nil
-BulletControl.Speed = 5
+BulletControl.Speed = 50
 BulletControl.luaObj = nil
 
 function BulletControl:Init(id,rotation,pos)
@@ -51,8 +51,15 @@ function BulletControl:Init(id,rotation,pos)
     
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
     self.Awake()
-    self.luaObj:AddOrRemoveListener(function() self:LateUpdate() end,E_LifeFun_Type.LateUpdate)
-    self.luaObj:AddOrRemoveListener(function() self:LateUpdate() end,E_LifeFun_Type.LateUpdate)
-    --self.luaObj:AddOrRemoveListener(function() self:OnTriggerEnter2D() end,E_LifeFun_Type.OnTriggerEnter2D)
+    self.luaObj:AddOrRemoveListener(function() self:Start() end,E_LifeFun_Type.Start)
+    self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
+
+    
+    
+end
+
+function BulletControl:DelayDestroy(time)
+    coroutine.yield(WaitForSeconds(time))
+    GameObject.Destroy(self.obj)
 end
 

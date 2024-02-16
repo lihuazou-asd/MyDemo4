@@ -8,13 +8,16 @@ RoleControl.animator = nil
 RoleControl.spriteRenderer = nil
 RoleControl.rigid = nil
 RoleControl.atkTimeOffset = 0
-RoleControl.atkTimeDelay = 1
+RoleControl.atkTimeDelay = 0.1
 RoleControl.isAtk = false
 RoleControl.nearMonsterControl = nil
 RoleControl.txtBld = nil
 RoleControl.gamePanel = nil
 
+RoleControl.isControl = nil
+
 RoleControl.state = {atk = nil,bld = nil,dod = nil,spd = nil,crt = nil,crd = nil,def = nil,name = nil}
+RoleControl.baseState = {}
 
 
 function RoleControl:Awake()
@@ -26,7 +29,7 @@ function RoleControl:Start()
     end
 end
 function RoleControl:Update()
-    if GameLevelMgrInstance.isBattle then
+    if self.isControl then
         self.gamePanel:UpdateTime()
         self.atkTimeOffset = self.atkTimeOffset + Time.deltaTime
         if Input.GetKey(KeyCode.W) then
@@ -95,6 +98,7 @@ end
 
 function RoleControl:Init(id)
     self.isAtk = false
+    self.isControl = true
     self.nearMonsterTransform = nil;
     self.id = id
     self.gamePanel = nil
@@ -108,6 +112,7 @@ function RoleControl:Init(id)
     self.animator = self.obj.transform:GetComponent(typeof(Animator))
     self.rigid = self.obj.transform:GetComponent(typeof(Rigidbody2D))
     self.state = {}
+    self.baseState = {}
     self:InitData(id)
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
     self.spriteRenderer = self.obj.transform:GetComponent(typeof(SpriteRenderer))
@@ -126,6 +131,15 @@ function RoleControl:InitData(id)
     self.state.crd = GameDataMgr.PlayerInfos[id].crd
     self.state.def = GameDataMgr.PlayerInfos[id].def
     self.state.name = GameDataMgr.PlayerInfos[id].name
+
+    self.baseState.atk = GameDataMgr.PlayerInfos[id].atk
+    self.baseState.bld = GameDataMgr.PlayerInfos[id].bld
+    self.baseState.dod = GameDataMgr.PlayerInfos[id].dod
+    self.baseState.spd = GameDataMgr.PlayerInfos[id].spd
+    self.baseState.crt = GameDataMgr.PlayerInfos[id].crt
+    self.baseState.crd = GameDataMgr.PlayerInfos[id].crd
+    self.baseState.def = GameDataMgr.PlayerInfos[id].def
+    self.baseState.name = GameDataMgr.PlayerInfos[id].name
 end
 function RoleControl:Atk()
     self.weaponTables.obj1Control:Atk()
@@ -135,10 +149,18 @@ end
 
 function RoleControl:UpdateState(obj)
     for k,v in pairs(obj) do
-        if k ~= "name" then
-            self.state[k]  = self.state[k] + v
+        if k ~= "name" and k ~= "id" then
+            self.baseState[k]  = self.baseState[k] + v
         end
     end
+end
+function RoleControl:InitState()
+    for k,v in pairs(self.baseState) do
+        if k ~= "name" and k ~= "id" then
+            self.state[k] = self.baseState[k]
+        end
+    end
+
 end
 
 function RoleControl:Hurt(dmg)

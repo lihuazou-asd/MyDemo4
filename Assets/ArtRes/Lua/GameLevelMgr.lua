@@ -14,12 +14,10 @@ function GameLevelMgr:Update()
             self.luaObj:StartCoroutine(util.cs_generator(function() self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  end))
             self.nowWave = self.nowWave+1
         end
-        print(self.killMonster)
-        print(self.Time)
         if self.levelInfo[self.nowLevel].nums == self.killMonster or self.Time > self.levelInfo[self.nowLevel].time then
             self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayVectory(1) end))
         end
-    end 
+    end
 end
 function GameLevelMgr:FixedUpdate()
 
@@ -50,6 +48,8 @@ GameLevelMgr.obj = nil
 GameLevelMgr.isBattle = nil
 GameLevelMgr.nowLevelMaxWave = 0
 
+GameLevelMgr.BagIcon = {}
+
 
 function GameLevelMgr:Init(obj,roleControl,levelInfo,monstersInfo)
     self.Time = 0
@@ -61,6 +61,7 @@ function GameLevelMgr:Init(obj,roleControl,levelInfo,monstersInfo)
     self.nowWave = 1
     self.killMonster = 0
     self.waveInfo = {}
+    self.BagIcon = {}
     self.isBattle = true
     for i = 1,#self.levelInfo do
         self.waveInfo[i] = GameDataMgr:InfosDeCode("json","WaveInfo_"..i,typeof(TextAsset))
@@ -75,7 +76,11 @@ function GameLevelMgr:NextLevel()
     self.Time = 0
     self.killMonster = 0
     self.nowWave = 1
+    self.roleControl:InitState()
+    UIMgr:GetPanel("GamePanel"):InitState()
     self.isBattle = true
+    self.roleControl.isControl = true
+    
 end
 
 function GameLevelMgr:UpdateWave()
@@ -109,14 +114,30 @@ function GameLevelMgr:GenerateMonster(id,pos,roleObj,roleControl)
 end
 
 function GameLevelMgr:DelayVectory(time)
-    coroutine.yield(WaitForSeconds(time))
-    print("战斗停止")
-    self.isBattle = false
-    self.Time = 0
-
+    if self.nowLevel < #self.levelInfo then
+        self.isBattle = false
+        coroutine.yield(WaitForSeconds(time))
+        self.roleControl.isControl= false
+        print("战斗停止")
+        self.Time = 0
+        UIMgr:ShowPanel("ChoosePanel")
+    else
+        self.isBattle = false
+        coroutine.yield(WaitForSeconds(time))
+        self.roleControl.isControl= false
+        print("顺利通关")
+    end
+    
 end
 
-function GameLevelMgr:ShowChoosePanel()
-
-
+function GameLevelMgr:AddBagIcon(id)
+    if self.BagIcon[id] ~= nil then
+        self.BagIcon[id].num = self.BagIcon[id].num +1
+        self.BagIcon[id].control:ChangeNum(self.BagIcon[id].num)
+    else
+        self.BagIcon[id] = {}
+        self.BagIcon[id].num = 1
+        UIMgr:GetPanel("ChoosePanel"):AddBagGrid(id)
+        
+    end
 end

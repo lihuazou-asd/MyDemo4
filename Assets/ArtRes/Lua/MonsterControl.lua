@@ -8,7 +8,8 @@ function MonsterControl:Start()
 
 end
 function MonsterControl:Update()
-    if GameLevelMgrInstance.isBattle then
+    if GameLevelMgrInstance.roleControl.isControl then
+        self.Time = self.Time + Time.deltaTime
         if self.isDead == false then
             self.AtkTimeOffset = self.AtkTimeOffset+Time.deltaTime
             self.DistanceWithRoleXY = {x = self.obj.transform.position.x-self.roleObj.transform.position.x,y = self.obj.transform.position.y-self.roleObj.transform.position.y}
@@ -24,10 +25,6 @@ function MonsterControl:Update()
             self.direction = (self.roleObj.transform.position - self.obj.transform.position).normalized
             self.obj.transform:Translate(self.direction*Time.deltaTime*self.Speed,Space.self)
             self.spriteRenderer.flipX = self.direction.x>0
-        else
-            self.animator:SetBool("Dead",self.isDead)
-            self.roleControl.nearMonsterControl = nil
-            self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroy(0.5) end))
         end
     else 
         self.animator.enabled = false
@@ -50,11 +47,25 @@ function MonsterControl:OnDestroy()
     self = nil
 end
 
+function MonsterControl:Dead()
+    self.animator:SetBool("Dead",self.isDead)
+    self.roleControl.nearMonsterControl = nil
+    self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroy(0.5) end))
+end
+
 function MonsterControl:OnTriggerEnter2D(other)
-    if other.tag == "Bullet" then
-        self.state.bld = self.state.bld - self.roleControl.state.atk
-        self:JudgeIsDead(self.state.bld)
+    if self.isDead == false then
+        if self.Time<0.5 then
+            return
+        end
+        if other.tag == "Bullet" then
+            print("self.Time>0.5:"..GameLevelMgrInstance.killMonster)
+            self.state.bld = self.state.bld - self.roleControl.state.atk
+            self:JudgeIsDead(self.state.bld)
+            print("self.Time>0.5:"..GameLevelMgrInstance.killMonster)
+        end
     end
+    
 end
 
 MonsterControl.id = nil
@@ -73,6 +84,7 @@ MonsterControl.AtkDelay = 1
 MonsterControl.AtkRange = 4
 MonsterControl.rigid = nil
 MonsterControl.collider = nil
+MonsterControl.Time = 0
 
 MonsterControl.DistanceWithRoleXY = nil
 
@@ -82,6 +94,7 @@ MonsterControl.roleControl = nil
 MonsterControl.DistanceWithRole = nil
 
 function MonsterControl:Init(id,pos,roleObj,roleControl)
+    self.Time = 0;
     self.roleControl = roleControl
     self.AtkTimeOffset = 0;
     self.DistanceWithRole = nil
@@ -99,7 +112,7 @@ function MonsterControl:Init(id,pos,roleObj,roleControl)
     self.animator = self.obj.transform:GetComponent(typeof(Animator))
     self.rigid = self.obj.transform:GetComponent(typeof(Rigidbody2D))
     self.collider = self.obj.transform:GetComponent(typeof(Collider2D))
-    self.collider.enabled = false
+    self.collider.enabled = true
     self.state = {}
     self:InitData(self.id)
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
@@ -108,7 +121,7 @@ function MonsterControl:Init(id,pos,roleObj,roleControl)
     self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
     self.luaObj:AddOrRemovePhysicsListener(function(other) self:OnTriggerEnter2D(other) end,E_LifeFun_Type.OnTriggerEnter2D)
     self.luaObj:AddOrRemoveListener(function() self:OnDestroy() end,E_LifeFun_Type.OnDestroy)
-    self.luaObj:StartCoroutine(util.cs_generator(function() self:EnabledCollider(0.5) end))
+    --self.luaObj:StartCoroutine(util.cs_generator(function() self:EnabledCollider(0.5) end))
 end
 
 function MonsterControl:InitData(id)
@@ -120,7 +133,9 @@ end
 
 function MonsterControl:DelayDestroy(time)
     coroutine.yield(WaitForSeconds(time))
+    GameLevelMgrInstance.killMonster = GameLevelMgrInstance.killMonster + 1
     GameObject.Destroy(self.obj)
+    print("Delay"..GameLevelMgrInstance.killMonster)
 end
 --事件中心时使用
 function MonsterControl:DestroyImmediate()
@@ -136,6 +151,6 @@ function MonsterControl:JudgeIsDead(bld)
     if bld <= 0 then
         self.isDead = true
         self.collider.enabled = false
-        GameLevelMgrInstance.killMonster = GameLevelMgrInstance.killMonster + 1
+        self:Dead()
     end
 end

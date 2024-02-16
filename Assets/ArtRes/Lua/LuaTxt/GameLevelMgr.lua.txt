@@ -14,10 +14,10 @@ function GameLevelMgr:Update()
             self.luaObj:StartCoroutine(util.cs_generator(function() self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  end))
             self.nowWave = self.nowWave+1
         end
+        print(self.killMonster)
+        print(self.Time)
         if self.levelInfo[self.nowLevel].nums == self.killMonster or self.Time > self.levelInfo[self.nowLevel].time then
-            print("战斗停止")
-            self.isBattle = false
-            self.Time = 0
+            self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayVectory(1) end))
         end
     end 
 end
@@ -37,7 +37,7 @@ function GameLevelMgr:OnDestroy()
 
 end
 
-GameLevelMgr.roleContrl = nil
+GameLevelMgr.roleControl = nil
 GameLevelMgr.levelInfo = nil
 GameLevelMgr.monstersInfo = nil
 GameLevelMgr.nowLevel = 1
@@ -51,10 +51,10 @@ GameLevelMgr.isBattle = nil
 GameLevelMgr.nowLevelMaxWave = 0
 
 
-function GameLevelMgr:Init(obj,roleContrl,levelInfo,monstersInfo)
+function GameLevelMgr:Init(obj,roleControl,levelInfo,monstersInfo)
     self.Time = 0
     self.obj = obj
-    self.roleContrl = roleContrl
+    self.roleControl = roleControl
     self.levelInfo = levelInfo
     self.nowLevel = 1
     self.monstersInfo = monstersInfo
@@ -70,8 +70,12 @@ function GameLevelMgr:Init(obj,roleContrl,levelInfo,monstersInfo)
     self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
 end
 
-function GameLevelMgr:NextLevel(id)
-
+function GameLevelMgr:NextLevel()
+    self.nowLevel = self.nowLevel+1
+    self.Time = 0
+    self.killMonster = 0
+    self.nowWave = 1
+    self.isBattle = true
 end
 
 function GameLevelMgr:UpdateWave()
@@ -87,7 +91,7 @@ function GameLevelMgr:GenerateMonsterCoroutine(monsterNums,waveId)
     while genedMonsterNum  <= monsterNums do
         if self.isBattle then
             print(monsterType[nowType])
-            self:GenerateMonster(monsterType[nowType],self.waveInfo[self.nowLevel][waveId].pos,self.roleContrl.obj,self.roleContrl)
+            self:GenerateMonster(monsterType[nowType],self.waveInfo[self.nowLevel][waveId].pos,self.roleControl.obj,self.roleControl)
             monsterTypeNums[nowType] = monsterTypeNums[nowType] - 1
             if monsterTypeNums[nowType]== 0 then
                 nowType = nowType +1
@@ -98,10 +102,18 @@ function GameLevelMgr:GenerateMonsterCoroutine(monsterNums,waveId)
     end
 end
 
-function GameLevelMgr:GenerateMonster(id,pos,roleObj,roleContrl)
+function GameLevelMgr:GenerateMonster(id,pos,roleObj,roleControl)
     local monsterControl = MonsterControl:new()
     local tmpPos = string.split(pos,":")
-    monsterControl:Init(id,tmpPos,roleObj,roleContrl)
+    monsterControl:Init(id,tmpPos,roleObj,roleControl)
+end
+
+function GameLevelMgr:DelayVectory(time)
+    coroutine.yield(WaitForSeconds(time))
+    print("战斗停止")
+    self.isBattle = false
+    self.Time = 0
+
 end
 
 function GameLevelMgr:ShowChoosePanel()

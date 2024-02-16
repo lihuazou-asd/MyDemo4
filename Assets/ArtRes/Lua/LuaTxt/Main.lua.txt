@@ -3,4 +3,5 @@ require("InitClass")
 GameDataMgr:Init()
 UIMgr:ShowPanel("MainPanel")
 
-
+local test = GameDataMgr:InfosDeCode("json","SelectObjInfos",typeof(TextAsset))
+print(1)

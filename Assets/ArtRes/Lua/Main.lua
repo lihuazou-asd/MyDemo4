@@ -3,4 +3,3 @@ require("InitClass")
 GameDataMgr:Init()
 UIMgr:ShowPanel("MainPanel")
 
-
