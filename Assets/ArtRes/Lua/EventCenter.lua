@@ -14,9 +14,9 @@ end
 -- 移除一个监听函数，eventName是事件名，func是函数或对象，method是方法名（可选）
 function EventCenter:removeListener(eventName, func, method)
     if self.events[eventName] then
-        for i,v in pairs(self.events[eventName]) do
+        for i = 1,#self.events[eventName] do
             if self.events[eventName][i].func == func and self.events[eventName][i].method == method then
-                self.events[eventName][i] = nil
+                table.remove(self.events[eventName],i)
                 break
             end
         end

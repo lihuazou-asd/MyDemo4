@@ -79,7 +79,14 @@ require("BulletControl")
 --管理器初始化
 require("UIMgr")
 require("GameLevelMgr")
+
+
+--设计模式
 require("EventCenter")
+require("PoolData")
+require("PoolMgr")
+poolMgr = _G["PoolMgr"]:new()
+poolMgr:Init()
 
 --读取json文件
 require("GameDataMgr")

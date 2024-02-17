@@ -5,7 +5,7 @@ function BulletControl:Awake()
 
 end
 function BulletControl:Start()
-    self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroy(5) end))
+    self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroy(1) end))
 end
 function BulletControl:Update()
     self.obj.transform:Translate(self.obj.transform.right*Time.deltaTime*self.Speed,Space.self)
@@ -39,7 +39,7 @@ BulletControl.Speed = 50
 BulletControl.luaObj = nil
 
 function BulletControl:Init(id,rotation,pos)
-    self.obj = ABMgr:LoadRes("bullet","BulletObj",typeof(GameObject))
+    self.obj = poolMgr:GetObject("BulletObj","bullet","BulletObj",typeof(GameObject))
     self.renderer = self.obj.transform:Find("renderer"):GetComponent(typeof(SpriteRenderer))
     
     self.id = id
@@ -60,6 +60,7 @@ end
 
 function BulletControl:DelayDestroy(time)
     coroutine.yield(WaitForSeconds(time))
-    GameObject.Destroy(self.obj)
+    GameObject.Destroy(self.luaObj)
+    poolMgr:PushObject("BulletObj",self.obj)
 end
 

@@ -3,50 +3,25 @@ require("InitClass")
 GameDataMgr:Init()
 UIMgr:ShowPanel("MainPanel")
 
--- 定义一个静态函数
-local function printHello()
-    print("Hello")
-end
 
--- 定义一个类
-Person = Object:subClass("Person")
+local tmpObj1 = GameObject("test")
+local tmpObj2 = GameObject("test")
+local tmpObj3 = GameObject("sss")
+local tmpObj4 = GameObject("zzt")
+local tmpObj5 = GameObject("tsst")
+local tmpObj6 = GameObject("zzt")
+local tmpObj7 = GameObject("test")
 
+poolMgr:PushObject(tmpObj1.name,tmpObj1)
+poolMgr:PushObject(tmpObj2.name,tmpObj2)
+poolMgr:PushObject(tmpObj3.name,tmpObj3)
+poolMgr:PushObject(tmpObj4.name,tmpObj4)
+poolMgr:PushObject(tmpObj5.name,tmpObj5)
+poolMgr:PushObject(tmpObj6.name,tmpObj6)
+poolMgr:PushObject(tmpObj7.name,tmpObj7)
 
--- 创建一个新的Person对象
-function Person:new(name)
-    local obj = {}
-    setmetatable(obj, Person)
-    obj.name = name
-    return obj
-end
+poolMgr:GetObject("zzt")
 
--- 定义一个实例方法
-function Person:sayHi()
-    print("Hi, I am " .. self.name)
-end
+poolMgr:GetObject("test")
 
-
--- 创建两个Person对象
-local alice = Person:new()
-alice.name = "Alice"
-local bob = Person:new()
-bob.name = "bob"
-
--- 添加监听函数
-eventCenter:addListener("greet", printHello) -- 添加一个静态函数
-eventCenter:addListener("greet", alice,Person.sayHi) -- 添加一个实例方法
-eventCenter:addListener("greet", bob,Person.sayHi) -- 添加一个实例方法
-
--- 触发事件
-eventCenter:triggerEvent("greet") -- 触发greet事件，输出：
--- Hello
--- Hi, I am Alice
--- Hi, I am Bob
-
--- 移除监听函数
-eventCenter:removeListener("greet", printHello) -- 移除一个静态函数
-eventCenter:removeListener("greet", bob,Person.sayHi) -- 移除一个实例方法
-
--- 触发事件
-eventCenter:triggerEvent("greet") -- 触发greet事件，输出：
--- Hi, I am Alice
+poolMgr:GetObject("test")
