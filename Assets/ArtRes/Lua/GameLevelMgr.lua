@@ -116,6 +116,7 @@ end
 function GameLevelMgr:DelayVectory(time)
     if self.nowLevel < #self.levelInfo then
         self.isBattle = false
+        eventCenter:triggerEvent("TimeOut")
         coroutine.yield(WaitForSeconds(time))
         self.roleControl.isControl= false
         print("战斗停止")
@@ -123,6 +124,7 @@ function GameLevelMgr:DelayVectory(time)
         UIMgr:ShowPanel("ChoosePanel")
     else
         self.isBattle = false
+        eventCenter:triggerEvent("TimeOut")
         coroutine.yield(WaitForSeconds(time))
         self.roleControl.isControl= false
         print("顺利通关")

@@ -79,6 +79,7 @@ require("BulletControl")
 --管理器初始化
 require("UIMgr")
 require("GameLevelMgr")
+require("EventCenter")
 
 --读取json文件
 require("GameDataMgr")

@@ -41,7 +41,7 @@ function MonsterControl:OnEnable()
 
 end
 function MonsterControl:OnDisable()
-
+    
 end
 function MonsterControl:OnDestroy()
     self = nil
@@ -117,6 +117,7 @@ function MonsterControl:Init(id,pos,roleObj,roleControl)
     self:InitData(self.id)
     self.luaObj = self.obj:AddComponent(typeof(LuaMonoObj))
     self.spriteRenderer = self.obj.transform:GetComponent(typeof(SpriteRenderer))
+    eventCenter:addListener("TimeOut",self,MonsterControl.DeadEvent)
     self.Awake()
     self.luaObj:AddOrRemoveListener(function() self:Update() end,E_LifeFun_Type.Update)
     self.luaObj:AddOrRemovePhysicsListener(function(other) self:OnTriggerEnter2D(other) end,E_LifeFun_Type.OnTriggerEnter2D)
@@ -130,10 +131,24 @@ function MonsterControl:InitData(id)
     self.state.bld = GameDataMgr.MonsterInfos[id].bld
 end
 
+function MonsterControl:DeadEvent()
+    self.isDead = true
+    self.collider.enabled = false
+    self.animator:SetBool("Dead",self.isDead)
+    self.roleControl.nearMonsterControl = nil
+    self.luaObj:StartCoroutine(util.cs_generator(function() self:DelayDestroyEvent(0.5) end))
+end
+
+function MonsterControl:DelayDestroyEvent(time)
+    coroutine.yield(WaitForSeconds(time))
+    eventCenter:removeListener("TimeOut",self,MonsterControl.DeadEvent)
+    GameObject.Destroy(self.obj)
+end
 
 function MonsterControl:DelayDestroy(time)
     coroutine.yield(WaitForSeconds(time))
     GameLevelMgrInstance.killMonster = GameLevelMgrInstance.killMonster + 1
+    eventCenter:removeListener("TimeOut",self,MonsterControl.DeadEvent)
     GameObject.Destroy(self.obj)
     print("Delay"..GameLevelMgrInstance.killMonster)
 end
