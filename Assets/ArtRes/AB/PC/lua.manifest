@@ -1,38 +1,44 @@
 ManifestFileVersion: 0
-CRC: 1013189587
+CRC: 751951953
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 3baff32b8ccb9774cf74191e3cb6dac7
+    Hash: df62d455a91611d7fd3117317feb66c2
   TypeTreeHash:
     serializedVersion: 2
     Hash: 5ad585dd02dfb5016c0dad519eab8f49
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 3baff32b8ccb9774cf74191e3cb6dac7
+    Hash: df62d455a91611d7fd3117317feb66c2
 HashAppended: 0
 ClassTypes:
 - Class: 49
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
+- Assets/ArtRes/Lua/LuaTxt/DetailPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/SetPanel.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/SObjPropertyENToCN.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/MonsterControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GameDataMgr.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/StartPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/JsonUtility.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GamePanel.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/PoolData.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/Object.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/ChoosePanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/util.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/PropertyGrid.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/ReadJson.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/PlayerInfo.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/GameLevelMgr.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/BulletControl.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/EventCenter.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/MainPanel.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/RoleControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/SplitTools.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/UIMgr.lua.txt
+- Assets/ArtRes/Lua/LuaTxt/PoolMgr.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/WeaponControl.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/SelectGrid.lua.txt
 - Assets/ArtRes/Lua/LuaTxt/RoleGrid.lua.txt

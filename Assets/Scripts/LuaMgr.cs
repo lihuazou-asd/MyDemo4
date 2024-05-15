@@ -21,23 +21,6 @@ public class LuaMgr : BaseManager<LuaMgr>
         luaEnv.AddLoader(MyCustomLoader);
         //luaEnv.AddLoader(MyCustomABLoader);
     }
-
-    public void DoLuaFile(string file)
-    {
-        luaEnv.DoString($"require('{file}')");
-    }
-
-    private byte[] MyCustomLoader(ref string fileName){
-        string path = Application.dataPath + "/ArtRes/Lua/"+fileName+".lua";
-        if(File.Exists(path)){
-            return File.ReadAllBytes(path);
-        }
-        else{
-            Debug.Log("MyCustomLoader重定向失败，文件名为" + path);
-        }
-        return null;
-    }
-
     private byte[] MyCustomABLoader(ref string fileName){
         
         TextAsset lua = ABMgr.GetInstance().LoadRes("lua",fileName+".lua") as TextAsset;
@@ -51,6 +34,23 @@ public class LuaMgr : BaseManager<LuaMgr>
 
         return null;
     }
+
+    private byte[] MyCustomLoader(ref string fileName){
+        string path = Application.dataPath + "/ArtRes/Lua/"+fileName+".lua";
+        if(File.Exists(path)){
+            return File.ReadAllBytes(path);
+        }
+        else{
+            Debug.Log("MyCustomLoader重定向失败，文件名为" + path);
+        }
+        return null;
+    }
+
+    
+    public void DoLuaFile(string file)
+    {
+        luaEnv.DoString($"require('{file}')");
+    }
     public void DoString(string str)
     {
         if(luaEnv == null)
@@ -60,7 +60,6 @@ public class LuaMgr : BaseManager<LuaMgr>
         }
         luaEnv.DoString(str);
     }
-
     public void Tick()
     {
         if (luaEnv == null)

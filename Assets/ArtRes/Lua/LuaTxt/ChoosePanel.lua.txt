@@ -15,6 +15,8 @@ ChoosePanel.textCrd = nil
 ChoosePanel.textAtk = nil
 ChoosePanel.textDef = nil
 
+ChoosePanel.nowDetailPanel = nil
+
 
 function ChoosePanel:BtnStartClick()
     UIMgr:HidePanel("ChoosePanel")
@@ -38,14 +40,8 @@ function ChoosePanel:Init(obj)
     self.textDef = self.obj.transform:Find("textDef"):GetComponent(typeof(Text))
     self.textName = self.obj.transform:Find("textName"):GetComponent(typeof(Text))
 
-    self.textAtk.text = GameLevelMgrInstance.roleControl.state.atk
-    self.textBld.text = GameLevelMgrInstance.roleControl.state.bld
-    self.textDod.text = GameLevelMgrInstance.roleControl.state.dod
-    self.textSpd.text = GameLevelMgrInstance.roleControl.state.spd
-    self.textCrt.text = GameLevelMgrInstance.roleControl.state.crt
-    self.textCrd.text = GameLevelMgrInstance.roleControl.state.crd
-    self.textDef.text = GameLevelMgrInstance.roleControl.state.def
-    self.textName.text = GameLevelMgrInstance.roleControl.state.name
+    self.nowDetailPanel = nil
+    self:UpdateState()
  
     --添加监听
     self.btnStart.onClick:AddListener(function()
@@ -62,22 +58,29 @@ end
 function ChoosePanel:GenerateSelectGrid()
     for i = 1,5 do
         local tmpSelectGrid = SelectGrid:new()
-        tmpSelectGrid:Init(1,self.svSelectTransform)
+        tmpSelectGrid:Init(GameDataMgr.SelectObjInfos[math.random(1,#GameDataMgr.SelectObjInfos)].id,self.svSelectTransform,true)
     end
 end
 
 function ChoosePanel:GenerateBagGrid()
+    for k,v in pairs(GameLevelMgrInstance.BagIcon) do
+        self:AddBagGrid(k)
+    end
+end
 
-
+function ChoosePanel:AddBagGrid(id)
+    local tmpSelectGrid = SelectGrid:new()
+    GameLevelMgrInstance.BagIcon[id].control = tmpSelectGrid
+    tmpSelectGrid:Init(id,self.svBagTransform,false)
 end
 
 function ChoosePanel:UpdateState()
-    self.textAtk.text = GameLevelMgrInstance.roleControl.state.atk
-    self.textBld.text = GameLevelMgrInstance.roleControl.state.bld
-    self.textDod.text = GameLevelMgrInstance.roleControl.state.dod
-    self.textSpd.text = GameLevelMgrInstance.roleControl.state.spd
-    self.textCrt.text = GameLevelMgrInstance.roleControl.state.crt
-    self.textCrd.text = GameLevelMgrInstance.roleControl.state.crd
-    self.textDef.text = GameLevelMgrInstance.roleControl.state.def
-    self.textName.text = GameLevelMgrInstance.roleControl.state.name
+    self.textAtk.text = GameLevelMgrInstance.roleControl.baseState.atk
+    self.textBld.text = GameLevelMgrInstance.roleControl.baseState.bld
+    self.textDod.text = GameLevelMgrInstance.roleControl.baseState.dod
+    self.textSpd.text = GameLevelMgrInstance.roleControl.baseState.spd
+    self.textCrt.text = GameLevelMgrInstance.roleControl.baseState.crt
+    self.textCrd.text = GameLevelMgrInstance.roleControl.baseState.crd
+    self.textDef.text = GameLevelMgrInstance.roleControl.baseState.def
+    self.textName.text = GameLevelMgrInstance.roleControl.baseState.name
 end

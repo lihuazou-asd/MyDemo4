@@ -36,6 +36,7 @@ public class ABUpdateMgr : MonoBehaviour
     private List<string> needToDownLoadAB = new List<string>();
 
     public void CheckUpABInfo(UnityAction<string> upDateTips){
+        bool isUpdate = false;
         localABInfoDic.Clear();
         remoteABInfoDic.Clear();
         needToDownLoadAB.Clear();
@@ -50,17 +51,22 @@ public class ABUpdateMgr : MonoBehaviour
                         upDateTips?.Invoke("获取本地AB包信息成功");
                         CompareLocalAndRemote(localABInfoDic,remoteABInfoDic);
                         upDateTips?.Invoke("比较两段AB包信息成功");
-                        
+                        StartUpdate(upDateTips);
                     }
                     else{
                         upDateTips?.Invoke("获取本地AB包信息失败");
+                        isUpdate = false;
                     }
                 });
             }
             else{
                 upDateTips?.Invoke("AB包对比文件下载错误");
+                isUpdate = false;
             }
         });
+        
+        
+        
     }
 
     public void StartUpdate(UnityAction<string> upDateTips){
@@ -104,7 +110,6 @@ public class ABUpdateMgr : MonoBehaviour
             unityAction?.Invoke(true);
         }
     }
-
     private IEnumerator GetLocalABCompareFile(string path,UnityAction<bool> unityAction){
         UnityWebRequest unityWebRequest = UnityWebRequest.Get(path);
         yield return unityWebRequest.SendWebRequest();

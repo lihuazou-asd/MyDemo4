@@ -40,8 +40,8 @@ function StartPanel:BtnStartClick()
 
 end
 function StartPanel:BtnExitClick()
+    UIMgr:ShowPanel("MainPanel")
     UIMgr:HidePanel("StartPanel")
-
 end
 function StartPanel:ChangeData(i)
     self.textAtk.text = GameDataMgr.PlayerInfos[i].atk
