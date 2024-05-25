@@ -15,6 +15,9 @@ function GameDataMgr:Init()
     if tmpStr~=nil then
         GameDataMgr.MusicData = Json.decode(tmpStr)
     end
+    GameObject.Find("BGM").transform:GetComponent(typeof(AudioSource)).mute = false
+    GameObject.Find("BGM").transform:GetComponent(typeof(AudioSource)).volume = GameDataMgr.MusicData.bgmData/100
+
 end
 
 function GameDataMgr:InfosDeCode(luaName,resName,type)

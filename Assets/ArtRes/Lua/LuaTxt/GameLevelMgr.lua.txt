@@ -11,7 +11,9 @@ function GameLevelMgr:Update()
         self.Time = self.Time + Time.deltaTime
         if self.nowWave <= self.nowLevelMaxWave and self.Time > self.waveInfo[self.nowLevel][self.nowWave].time then
             local tmpWave = self.nowWave
-            self.luaObj:StartCoroutine(util.cs_generator(function() self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  end))
+            self.luaObj:StartCoroutine(util.cs_generator(function() 
+                self:GenerateMonsterCoroutine(self.waveInfo[self.nowLevel][self.nowWave].totalNums,tmpWave)  
+            end))
             self.nowWave = self.nowWave+1
         end
         if self.levelInfo[self.nowLevel].nums == self.killMonster or self.Time > self.levelInfo[self.nowLevel].time then
@@ -128,6 +130,8 @@ function GameLevelMgr:DelayVectory(time)
         coroutine.yield(WaitForSeconds(time))
         self.roleControl.isControl= false
         print("顺利通关")
+        UIMgr:ShowPanel("MainPanel")
+        GameObject.Destroy(self.obj)
     end
     
 end

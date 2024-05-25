@@ -7,6 +7,7 @@ UIMgr.panelDic = {}
 
 
 function UIMgr:ShowPanel(panelName)
+    print(123)
     --如果面板存在则直接返回
     if self.panelDic[panelName]~=nil then
         return self.panelDic[panelName]

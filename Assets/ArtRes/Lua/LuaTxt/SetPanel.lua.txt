@@ -36,6 +36,7 @@ function SetPanel:Init(obj)
     self.sldBgm.onValueChanged:AddListener(function(i)
         self.sldBgmText.text = i
         GameDataMgr.MusicData.bgmData = i
+        GameObject.Find("BGM").transform:GetComponent(typeof(AudioSource)).volume = i/100
     end)
     self.sldBtm.onValueChanged:AddListener(function(i)
         self.sldBtmText.text = i

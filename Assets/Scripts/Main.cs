@@ -14,7 +14,6 @@ public class Main : MonoBehaviour
     {
         ABUpdateMgr.Instance.CheckUpABInfo(updateTips);
         LuaMgr.GetInstance().Init();
-        LuaMgr.GetInstance().DoLuaFile("Main");
         // Button button;
         // button.transition = Selectable.Transition.None
         // EventTrigger trigger = GetComponent<EventTrigger>();

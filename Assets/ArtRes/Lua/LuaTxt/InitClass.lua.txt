@@ -30,6 +30,7 @@ EventTrigger = CS.UnityEngine.EventSystems.EventTrigger
 EventTriggerType = CS.UnityEngine.EventSystems.EventTriggerType
 Transition = CS.UnityEngine.UI.Selectable.Transition
 RectTransform = CS.UnityEngine.RectTransform
+AudioSource = CS.UnityEngine.AudioSource
 --输入控制
 Input = CS.UnityEngine.Input
 

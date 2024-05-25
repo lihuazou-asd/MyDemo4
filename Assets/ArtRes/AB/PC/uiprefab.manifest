@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2682712958
+CRC: 3694727312
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 81874b294decf409ee91f2508ebef493
+    Hash: e4c9c356674f1e7caa97600188ccd385
   TypeTreeHash:
     serializedVersion: 2
     Hash: 4ad32dbeb5dc1eec6059d1d394bf0f35
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 81874b294decf409ee91f2508ebef493
+    Hash: e4c9c356674f1e7caa97600188ccd385
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -84,6 +84,7 @@ Assets:
 - Assets/ArtRes/Prefab/UIPrefab/SelectGrid.prefab
 - Assets/ArtRes/Prefab/UIPrefab/RoleGrid.prefab
 - Assets/ArtRes/Prefab/UIPrefab/StartPanel.prefab
+- Assets/ArtRes/Prefab/UIPrefab/LoadingPanel.prefab
 - Assets/ArtRes/Prefab/UIPrefab/ChoosePanel.prefab
 - Assets/ArtRes/Prefab/UIPrefab/GamePanel.prefab
 - Assets/ArtRes/Prefab/UIPrefab/DetailPanel.prefab

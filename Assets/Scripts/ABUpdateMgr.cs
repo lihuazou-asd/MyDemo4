@@ -75,6 +75,8 @@ public class ABUpdateMgr : MonoBehaviour
                 if(isOver){
                     upDateTips?.Invoke("更新AB包成功");
                     File.WriteAllText(localPath+"/ABCompareInfo.txt",File.ReadAllText(localPath+"/ABCompareInfo_TMP.txt"));
+                    LuaMgr.GetInstance().DoLuaFile("Main");
+                    GameObject.Find("Canvas").transform.Find("LoadingPanel").gameObject.SetActive(false);
                 }
                 else{
                     upDateTips?.Invoke("更新AB包失败");

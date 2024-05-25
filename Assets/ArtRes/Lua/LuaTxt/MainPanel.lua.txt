@@ -10,11 +10,11 @@ MainPanel.btnExit = nil
 
 function MainPanel:BtnStartClick()
     UIMgr:ShowPanel("StartPanel")
+    UIMgr:HidePanel("MainPanel")
 
 end
 function MainPanel:BtnSetClick()
     UIMgr:ShowPanel("SetPanel")
-
 end
 
 function MainPanel:Init(obj)
